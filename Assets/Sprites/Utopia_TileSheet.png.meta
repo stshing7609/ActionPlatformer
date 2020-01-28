@@ -1,0 +1,1108 @@
+fileFormatVersion: 2
+guid: 40efd6a1ee3278f4bbf56d02ad1a1a4e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8893250788688492577
+    second: Utopia_TileSheet_0
+  - first:
+      213: -6246530236446612136
+    second: Utopia_TileSheet_1
+  - first:
+      213: 4295929226561537549
+    second: Utopia_TileSheet_2
+  - first:
+      213: -1847328475168729920
+    second: Utopia_TileSheet_3
+  - first:
+      213: 284610210798047004
+    second: Utopia_TileSheet_4
+  - first:
+      213: -5481956924314500707
+    second: Utopia_TileSheet_5
+  - first:
+      213: -5504931618633527413
+    second: Utopia_TileSheet_5
+  - first:
+      213: 4725867127256728373
+    second: Utopia_TileSheet_31
+  - first:
+      213: -8074383213098565894
+    second: Utopia_TileSheet_7
+  - first:
+      213: 8275884537469250502
+    second: Utopia_TileSheet_8
+  - first:
+      213: -1289025033251041472
+    second: Utopia_TileSheet_9
+  - first:
+      213: 855733112426462216
+    second: Utopia_TileSheet_10
+  - first:
+      213: -4603545980069661024
+    second: Utopia_TileSheet_11
+  - first:
+      213: -3615066680113710348
+    second: Utopia_TileSheet_12
+  - first:
+      213: 1063527052301137449
+    second: Utopia_TileSheet_13
+  - first:
+      213: -6622684730742801306
+    second: Utopia_TileSheet_14
+  - first:
+      213: 8289167633241558906
+    second: Utopia_TileSheet_16
+  - first:
+      213: -7560890956778157199
+    second: Utopia_TileSheet_15
+  - first:
+      213: -586475373043744535
+    second: Utopia_TileSheet_16
+  - first:
+      213: -2430519356145196382
+    second: Utopia_TileSheet_19
+  - first:
+      213: -8776381223435076726
+    second: Utopia_TileSheet_20
+  - first:
+      213: -3108617394861795931
+    second: Utopia_TileSheet_17
+  - first:
+      213: -1599725656324264585
+    second: Utopia_TileSheet_18
+  - first:
+      213: -9048386011111765308
+    second: Utopia_TileSheet_19
+  - first:
+      213: 6667451445556489715
+    second: Utopia_TileSheet_20
+  - first:
+      213: 8277981971610146106
+    second: Utopia_TileSheet_21
+  - first:
+      213: -8841338084230071028
+    second: Utopia_TileSheet_22
+  - first:
+      213: -8561300384503994654
+    second: Utopia_TileSheet_23
+  - first:
+      213: -7286946759079744089
+    second: Utopia_TileSheet_24
+  - first:
+      213: 7807614228040507612
+    second: Utopia_TileSheet_25
+  - first:
+      213: 3499733813723867682
+    second: Utopia_TileSheet_26
+  - first:
+      213: 691394585714320028
+    second: Utopia_TileSheet_27
+  - first:
+      213: -3882752237630683820
+    second: Utopia_TileSheet_28
+  - first:
+      213: -4439316868460042312
+    second: Utopia_TileSheet_29
+  - first:
+      213: -8379208227725743276
+    second: Utopia_TileSheet_30
+  - first:
+      213: -2439414532692749718
+    second: Utopia_TileSheet_31
+  - first:
+      213: 5603195772727895177
+    second: Utopia_TileSheet_32
+  - first:
+      213: 4135570979665370338
+    second: Utopia_TileSheet_33
+  - first:
+      213: -3931059015305184983
+    second: Utopia_TileSheet_35
+  - first:
+      213: 6908057892594833691
+    second: Utopia_TileSheet_40
+  - first:
+      213: -3987059728165748854
+    second: Utopia_TileSheet_34
+  - first:
+      213: 5603195772727895177
+    second: Utopia_TileSheet_37
+  - first:
+      213: 4135570979665370338
+    second: Utopia_TileSheet_38
+  - first:
+      213: -3931059015305184983
+    second: Utopia_TileSheet_39
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 131
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Utopia_TileSheet_0
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 1761
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0870a30a95984f84c960be5989b43317
+      internalID: 8893250788688492577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_1
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 1761
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2ebeb773a06fd046aaa5984ce42356a
+      internalID: -6246530236446612136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_2
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 1762
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d354c275b68d5b4082ea8c76d830008
+      internalID: 4295929226561537549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_3
+      rect:
+        serializedVersion: 2
+        x: 651
+        y: 1761
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd4cc760e9383e448a876321c808a96b
+      internalID: -1847328475168729920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_4
+      rect:
+        serializedVersion: 2
+        x: 781
+        y: 1761
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a522d056dbd46924088864c711b9ce27
+      internalID: 284610210798047004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_6
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 1565
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c20a0d3e1debe64baca75799e0dba19
+      internalID: -5481956924314500707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_5
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 1566
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac2520109c5d3db4ab869fd52d2c6973
+      internalID: -5504931618633527413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_36
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 66
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 274c8ac46d4c658418c8e4653906d5f8
+      internalID: 4725867127256728373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_7
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 1564
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad11c64436a4f4347bf359d54a907a48
+      internalID: -8074383213098565894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_8
+      rect:
+        serializedVersion: 2
+        x: 651
+        y: 1566
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e6c4febe0636a140bdfdfd73baeb3d5
+      internalID: 8275884537469250502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_9
+      rect:
+        serializedVersion: 2
+        x: 783
+        y: 1566
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 369e8e10bf2f5ad46abfbba621a51913
+      internalID: -1289025033251041472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_10
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 1370
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af0b0d2ddb1c95048bebd5df80074cb8
+      internalID: 855733112426462216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_11
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 1370
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2bc5a26015e5b94090bdf82da0dbd10
+      internalID: -4603545980069661024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_12
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 1370
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25552e818261a9c43819088bdbfe67fd
+      internalID: -3615066680113710348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_13
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 1370
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ee5384e307351e4cad91ee2742108f9
+      internalID: 1063527052301137449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_14
+      rect:
+        serializedVersion: 2
+        x: 782
+        y: 1370
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f793dea27cecc741ab834cd8da18bde
+      internalID: -6622684730742801306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_15
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 1174
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d8496a2dc4d42d4c83d84b4ef704e73
+      internalID: -7560890956778157199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_16
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 1043
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d19e36926cefbd4a91fbd05f8e5a01f
+      internalID: -586475373043744535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_17
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 912
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43f888789f1c1314fb3ea50a6bc49921
+      internalID: -3108617394861795931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_18
+      rect:
+        serializedVersion: 2
+        x: 259
+        y: 1175
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4118807080427bc40975729107e5b080
+      internalID: -1599725656324264585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_19
+      rect:
+        serializedVersion: 2
+        x: 259
+        y: 1044
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3f11e8c460d8c446af66a280552a24e
+      internalID: -9048386011111765308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_20
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 1175
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d302437b03433864ebd560d7d13e8932
+      internalID: 6667451445556489715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_21
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 1044
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36210bcb46283194d893ccda74626c27
+      internalID: 8277981971610146106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_22
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 1175
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5d63a09d20179849a1d41c843f77bea
+      internalID: -8841338084230071028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_23
+      rect:
+        serializedVersion: 2
+        x: 781
+        y: 1175
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 506ec2f5747fe8b42a3b806ea81b6d27
+      internalID: -8561300384503994654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_24
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 1044
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e562597919a49343a99359f55d30890
+      internalID: -7286946759079744089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_25
+      rect:
+        serializedVersion: 2
+        x: 781
+        y: 1044
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 138f7baab9ef8e44c84ef295167921a5
+      internalID: 7807614228040507612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_26
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 849
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9efd9bfe29f91144b82df442257b82a1
+      internalID: 3499733813723867682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_27
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 718
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa15d1d343f9caf4c86a27d31bdd780c
+      internalID: 691394585714320028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_28
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 522
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6efcc02d34fe89d458dbea07ccd2599e
+      internalID: -3882752237630683820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_29
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 522
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9807d56568f56c41a49516a3f611519
+      internalID: -4439316868460042312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_30
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 391
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 632479986f981e34392bb90f3c5d6426
+      internalID: -8379208227725743276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_31
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 522
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a173165c3e1e5f47b3b3a0e93d9d15e
+      internalID: -2439414532692749718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_32
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 522
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7129c187ed1cc144a5de5c6cd969774
+      internalID: 5603195772727895177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_33
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 391
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4964a25e430f12b44bad5ff45b256cd9
+      internalID: 4135570979665370338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_35
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 68
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f3278b47f813d24c9949cbfe5fcd608
+      internalID: -3931059015305184983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_40
+      rect:
+        serializedVersion: 2
+        x: 655
+        y: 1171
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7fe7e933738f87a4092778edcdbe727c
+      internalID: 6908057892594833691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_34
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 197
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16c670757503348488cab001369613f6
+      internalID: -3987059728165748854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_37
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 66
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 686be687d0e02344eb2ab68fc6e7b506
+      internalID: 5603195772727895177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_38
+      rect:
+        serializedVersion: 2
+        x: 519
+        y: 66
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c86d6288d6106524a8f4e9d1ff5c632d
+      internalID: 4135570979665370338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Utopia_TileSheet_39
+      rect:
+        serializedVersion: 2
+        x: 519
+        y: 196
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f23ef2dd513fd0f4881cd0ec8f21c8e8
+      internalID: -3931059015305184983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

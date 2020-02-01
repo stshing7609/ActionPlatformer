@@ -35,7 +35,7 @@ public class PhysicsObject2D : MonoBehaviour
         contactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(gameObject.layer));
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         targetVelocity = Vector2.zero;
         ComputeVelocity();

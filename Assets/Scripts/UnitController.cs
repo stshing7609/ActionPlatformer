@@ -12,7 +12,7 @@ public class UnitController : PhysicsObject2D
 
     protected bool onLedge;
 
-    protected SpriteRenderer spriteRenderer;
+    public SpriteRenderer spriteRenderer;
 
     // Start is called before the first frame update
     void Start()

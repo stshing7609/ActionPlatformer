@@ -12,7 +12,8 @@ public class PlayerPlatformerController : UnitController
     public float wallFallSpeedMultiplier = 0.3f;
     public float stompImpulse = -5;
     public bool flipSprite;
-    public PickUpObject pickUpObject;
+    public GameObject pickUpObject;
+    public LockObject lockInRange;
 
     Vector2 move;
     float jumpForgivenessTime;
@@ -38,10 +39,13 @@ public class PlayerPlatformerController : UnitController
     protected override void Update()
     {
         base.Update();
-        if (pickUpObject != null && Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log(pickUpObject);
-            PickUp();
+           if(pickUpObject != null)
+                PickUp();
+
+            if (lockInRange != null)
+                UseLock();
         }
     }
 
@@ -139,6 +143,33 @@ public class PlayerPlatformerController : UnitController
         inventory.AddItem(pickUpObject);
         pickUpObject = null;
     }
+
+
+    private void UseLock()
+    {
+        // Close it
+        if (lockInRange.isOpen)
+        {
+            if (inventory.CheckInventoryFull())
+                return;
+            
+            int idToAdd = lockInRange.Close();
+
+            inventory.AddItem(idToAdd);
+        }
+        else
+        {
+            int tryKey = -1;
+
+            tryKey = lockInRange.Open(inventory.GetItemIds());
+            // no valid key is possessed
+            if (tryKey < 0)
+                return;
+
+            inventory.RemoveItem(tryKey);
+        }
+    }
+
     /* Wall Jump Concepting
      * Find left and right contacts of player collider
      * Make sure not grounded

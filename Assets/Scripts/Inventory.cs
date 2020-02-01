@@ -4,31 +4,60 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    List<PickUpObject> items;
-    const int MAX_ITEMS = 4;
+    const int MAX_ITEMS = 3;
+
+    public GameObject pickUpObjectPrefab;
+
+    List<GameObject> items;
+
+    Vector2[] slotPositions = new Vector2[] { new Vector2(0.505f, 0.59f), new Vector2(0.75f, 0.125f), new Vector2(0.505f, -0.3f) };
     
     // Start is called before the first frame update
     void Start()
     {
-        items = new List<PickUpObject>();
+        items = new List<GameObject>();
     }
 
-    public void AddItem(PickUpObject item)
+    public void AddItem(GameObject item)
     {
         if (items.Count > MAX_ITEMS)
         {
-            Debug.Log("Max inventory is 4");
+            Debug.Log("Max inventory is 3");
             return;
         }
 
-        item.PickUp(transform);
+        item.GetComponent<PickUpObject>().PickUp(transform, slotPositions[items.Count]);
         items.Add(item);
     }
 
-    public void RemoveItem(PickUpObject item)
+    public void AddItem(int id)
     {
-        if (items.Contains(item))
-            items.Remove(item);
+        if (items.Count > MAX_ITEMS)
+        {
+            Debug.Log("Max inventory is 3");
+            return;
+        }
+
+        GameObject instance = Instantiate(pickUpObjectPrefab);
+        instance.GetComponent<PickUpObject>().Init(id);
+        instance.GetComponent<PickUpObject>().PickUp(transform, slotPositions[items.Count]);
+        items.Add(instance);
+    }
+
+    public void RemoveItem(int id)
+    {
+        foreach (GameObject item in items)
+        {
+            PickUpObject puo = item.GetComponent<PickUpObject>();
+
+            if (puo.Id == id)
+            {
+                puo.Use();
+                items.Remove(item);
+                UpdatePositions();
+                return;
+            }
+        }
     }
 
     public void RemoveAll()
@@ -36,18 +65,27 @@ public class Inventory : MonoBehaviour
         items.Clear();
     }
 
-    public PickUpObject UseItem(int keyCode)
+    public List<int> GetItemIds()
     {
-        foreach(PickUpObject item in items)
-        {
-            if (item.KeyCode == keyCode)
-            {
-                item.Use();
-                items.Remove(item);
-                return item;
-            }
-        }
+        List<int> ids = new List<int>();
 
-        return null;
+        foreach (GameObject item in items)
+        {
+            ids.Add(item.GetComponent<PickUpObject>().Id);
+        }
+        return ids;
+    }
+
+    public bool CheckInventoryFull()
+    {
+        return items.Count >= MAX_ITEMS;
+    }
+
+    void UpdatePositions()
+    {
+        for(int i = 0; i < items.Count; i++)
+        {
+            items[i].GetComponent<PickUpObject>().UpdatePosition(slotPositions[i]);
+        }
     }
 }

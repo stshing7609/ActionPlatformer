@@ -135,7 +135,9 @@ MonoBehaviour:
   myCollider: {fileID: 8000107144399984016}
   anim: {fileID: 8000107145084624257}
   interactionSensor: {fileID: 1294395866}
+  rend: {fileID: 8000107145084624256}
   dampTime: 0.15
+  id: 0
 --- !u!1 &8000107145084624259
 GameObject:
   m_ObjectHideFlags: 0

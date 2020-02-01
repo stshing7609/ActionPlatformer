@@ -11,8 +11,8 @@ public class LockObject : MonoBehaviour
 {
     public bool isOpen = false;
     public Collider2D myCollider;
+    public int[] validKeys;
     Animator anim;
-    int[] validKeys;
     int keyIdUsed = -1;
     // Enemy[] myEnemies
     

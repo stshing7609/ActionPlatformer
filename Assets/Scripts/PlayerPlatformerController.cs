@@ -12,7 +12,8 @@ public class PlayerPlatformerController : UnitController
     public float wallFallSpeedMultiplier = 0.3f;
     public float stompImpulse = -5;
     public bool flipSprite;
-    public PickUpObject pickUpObject;
+    public GameObject pickUpObject;
+    public LockObject lockInRange;
 
     Vector2 move;
     float jumpForgivenessTime;
@@ -38,10 +39,18 @@ public class PlayerPlatformerController : UnitController
     protected override void Update()
     {
         base.Update();
-        if (pickUpObject != null && Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log(pickUpObject);
-            PickUp();
+           if(pickUpObject != null)
+                PickUp();
+
+            if (lockInRange != null)
+                UseLock();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q) && grounded && !jumping && jumpCount == 0)
+        {
+            DropItem();
         }
     }
 
@@ -139,6 +148,78 @@ public class PlayerPlatformerController : UnitController
         inventory.AddItem(pickUpObject);
         pickUpObject = null;
     }
+    
+    private void UseLock()
+    {
+        // Close it
+        if (lockInRange.isOpen)
+        {
+            if (inventory.CheckInventoryFull())
+            {
+                Debug.Log("Max inventory is 3");
+                return;
+            }
+            
+            int idToAdd = lockInRange.Close();
+
+            inventory.AddItem(idToAdd);
+        }
+        else
+        {
+            int tryKey = -1;
+
+            tryKey = lockInRange.Open(inventory.GetItemIds());
+            // no valid key is possessed
+            if (tryKey < 0)
+                return;
+
+            inventory.UseItem(tryKey, lockInRange);
+        }
+    }
+
+    private void DropItem()
+    {
+        if (inventory.CheckInventoryEmpty())
+        {
+            Debug.Log("no items to drop");
+            return;
+        }
+
+        Vector2 dir = Vector2.zero;
+
+        if (spriteRenderer.flipX)
+            dir = Vector2.right;
+        else
+            dir = Vector2.left;
+
+        // raycast right first
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, 1f, ~LayerMask.NameToLayer("Player"));
+
+        Debug.DrawRay(transform.position, dir, Color.yellow);
+
+        if (!hit)
+        {
+            Vector2 newPos = new Vector2(transform.position.x + 0.75f * dir.x, transform.position.y);
+            inventory.DropItem(newPos);
+            return;
+        }
+
+        dir = -dir;
+
+        hit = Physics2D.Raycast(transform.position, dir, 1f, ~LayerMask.NameToLayer("Player"));
+
+        Debug.DrawRay(transform.position, dir, Color.yellow);
+
+        if (!hit)
+        {
+            Vector2 newPos = new Vector2(transform.position.x + 0.75f * dir.x, transform.position.y);
+            inventory.DropItem(newPos);
+            return;
+        }
+
+        Debug.Log("Can't drop item here");
+    }
+
     /* Wall Jump Concepting
      * Find left and right contacts of player collider
      * Make sure not grounded

@@ -21,30 +21,40 @@ using UnityEngine;
 
 public class PickUpObject : MonoBehaviour
 {
-    public Collider2D myCollider;
     public Animator anim;
     public GameObject interactionSensor;
+    public SpriteRenderer rend;
     public float dampTime = 0.15f;
 
-    private Vector3 startPosition;
-    private int keyCode;
+    public int id;
     private bool isHeld = false;
-    private bool used = false;
     private Transform playerTransform;
     private PlayerPlatformerController player;
     private Vector3 velocity = Vector3.zero;
 
     public bool IsHeld { get => isHeld; }
-    public bool Used { get => used; }
-    public int KeyCode { get => keyCode; }
+    public int Id { get => id; }
 
     // Start is called before the first frame update
     void Start()
     {
-        startPosition = transform.position;
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         player = playerTransform.GetComponent<PlayerPlatformerController>();
         anim.enabled = false;
+        switch(id)
+        {
+            case 0:
+                rend.color = new Color(0, 1, 0.2533984f, 1);
+                break;
+            case 1:
+                rend.color = new Color(0, 0.3429475f, 1, 1);
+                break;
+            case 2:
+                rend.color = new Color(1, 0.8929985f, 0, 1);
+                break;
+            default:
+                break;
+        }
     }
 
     // Update is called once per frame
@@ -54,29 +64,51 @@ public class PickUpObject : MonoBehaviour
             Follow();
     }
 
-    public void PickUp(Transform newParent)
+    public void Init(int id, Vector2 pos)
+    {
+        this.id = id;
+        transform.position = pos;
+
+        Start();
+    }
+
+    public void PickUp(Transform newParent, Vector2 newPos)
     {
         gameObject.SetActive(true);
         isHeld = true;
-        myCollider.enabled = false;
         transform.localScale = new Vector2(.25f, .25f);
         transform.SetParent(newParent);
         anim.enabled = true;
         interactionSensor.SetActive(false);
+        rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, 1);
 
         if(player.spriteRenderer.flipX)
-            transform.localPosition = new Vector2(-0.6f, 0.135f);
+            transform.localPosition = new Vector2(-newPos.x, newPos.y);
         else
-            transform.localPosition = new Vector2(0.6f, 0.135f);
+            transform.localPosition = newPos;
     }
 
-    public void Use()
+    public void Use(LockObject lockObject)
     {
-        used = true;
         isHeld = false;
-        transform.localScale = Vector2.one;
-        gameObject.SetActive(false);
-        anim.enabled = false;
+        transform.SetParent(lockObject.transform);
+        transform.localPosition = Vector2.zero;
+        transform.localScale = new Vector2(.33f, .24f);
+        rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, .4f);
+        lockObject.myObject = this;
+    }
+
+    public void DestroyIt()
+    {
+        Destroy(gameObject);
+    }
+
+    public void UpdatePosition(Vector2 newPos)
+    {
+        if (player.spriteRenderer.flipX)
+            transform.localPosition = new Vector2(-newPos.x, newPos.y);
+        else
+            transform.localPosition = newPos;
     }
 
     void Follow()

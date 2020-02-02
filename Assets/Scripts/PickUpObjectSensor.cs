@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractionSensor : MonoBehaviour
+public class PickUpObjectSensor : MonoBehaviour
 {
     PlayerPlatformerController player;
     
@@ -16,7 +16,7 @@ public class InteractionSensor : MonoBehaviour
     {
         if(collision.transform.CompareTag("Player"))
         {
-            player.pickUpObject = transform.parent.GetComponent<PickUpObject>();
+            player.pickUpObject = transform.parent.gameObject;
         }
     }
 

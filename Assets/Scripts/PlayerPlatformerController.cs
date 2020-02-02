@@ -109,7 +109,7 @@ public class PlayerPlatformerController : UnitController
             if (Input.GetButtonDown("Jump") && (grounded || (jumping && jumpCount < 2)))
             {
                 if (jumpCount > jumpTakeOffSpeeds.Length)
-                    jumpCount = jumpTakeOffSpeeds.Length;
+                    jumpCount = jumpTakeOffSpeeds.Length - 1;
                 
                 velocity.y = jumpTakeOffSpeeds[jumpCount];
                 jumping = true;

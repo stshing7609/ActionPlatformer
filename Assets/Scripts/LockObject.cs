@@ -12,6 +12,7 @@ public class LockObject : MonoBehaviour
     public bool isOpen = false;
     Collider2D myCollider;
     public int[] validKeys;
+    public Light[] lights;
     public PickUpObject myObject;
     public Sprite closedSprite;
     public Sprite openSprite;
@@ -26,11 +27,11 @@ public class LockObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        myCollider = GetComponent<Collider2D>();
         rend = GetComponent<SpriteRenderer>();
         rend.sprite = closedSprite;
-        myCollider = GetComponent<Collider2D>();
         myCollider.enabled = true;
-        //validKeys = new int[] { 0, 1, 2 };
+        DisableLights();
     }
 
     // takes in a set of keys
@@ -48,6 +49,7 @@ public class LockObject : MonoBehaviour
                     isOpen = true;
                     rend.sprite = openSprite;
                     myCollider.enabled = false;
+                    EnableLightss();
 
                     if (!firstOpen)
                     {
@@ -71,6 +73,7 @@ public class LockObject : MonoBehaviour
         isOpen = false;
         myCollider.enabled = true;
         rend.sprite = closedSprite;
+        DisableLights();
 
         keyIdUsed = -1;
 
@@ -78,5 +81,23 @@ public class LockObject : MonoBehaviour
         myObject = null;
 
         return temp;
+    }
+
+    void DisableLights()
+    {
+        if(lights != null)
+        {
+            foreach(Light light in lights)
+                light.enabled = false;
+        }
+    }
+
+    void EnableLightss()
+    {
+        if (lights != null)
+        {
+            foreach (Light light in lights)
+                light.enabled = false;
+        }
     }
 }

@@ -774,6 +774,11 @@ PrefabInstance:
     - target: {fileID: 1594137337060581137, guid: 60f545dd73bb0694f8121570d2d3108f,
         type: 3}
       propertyPath: validKeys.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1594137337060581137, guid: 60f545dd73bb0694f8121570d2d3108f,
+        type: 3}
+      propertyPath: lights.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1594137337060581137, guid: 60f545dd73bb0694f8121570d2d3108f,

@@ -31,7 +31,7 @@ public class LockObject : MonoBehaviour
         myCollider = GetComponent<Collider2D>();
         rend = GetComponent<SpriteRenderer>();
         rend.sprite = closedSprite;
-        myCollider.enabled = true;
+        //myCollider.enabled = true;
         DisableLights();
     }
 

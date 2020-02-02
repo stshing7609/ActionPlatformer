@@ -105,7 +105,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af96d247b52dc3e479f8d50fcf68898c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myCollider: {fileID: 0}
   anim: {fileID: 8000107145084624257}
   interactionSensor: {fileID: 1294395866}
   rend: {fileID: 8000107145084624256}
@@ -179,8 +178,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1737515607
-  m_SortingLayer: 3
+  m_SortingLayerID: -496899771
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -3882752237630683820, guid: 40efd6a1ee3278f4bbf56d02ad1a1a4e,
     type: 3}

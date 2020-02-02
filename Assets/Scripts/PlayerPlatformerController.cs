@@ -36,6 +36,10 @@ public class PlayerPlatformerController : UnitController
         jumpForgivenessTime = Time.deltaTime * 4;
     }
 
+    public bool IsGrounded()
+    {
+        return grounded;
+    }
     protected override void Update()
     {
         base.Update();

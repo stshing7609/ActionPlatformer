@@ -19,19 +19,35 @@ public class Saver : MonoBehaviour
 
     public Transform player;
     private Inventory inventory;
-    public List<LockObject> locks = new List<LockObject>; // Must add each lock to this to track their states.
-    public List<GameObject> keys = new List<GameObject>; // Must add each key to this to track their states.
+    private Vector2 lastCheckPoint;
+    public List<LockObject> locks = new List<LockObject>(); // Must add each lock to this to track their states.
+    public List<GameObject> keys = new List<GameObject>(); // Must add each key to this to track their states.
+    public int saveInterval = 600; // Save every 10 seconds.
     private List<int> itemIDs;
+    private int framecount = 0;
+    private bool saveMode = false;
     void Start()
     {
         inventory = GetComponent<Inventory>();
         itemIDs = new List<int>();
+        lastCheckPoint = player.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        itemIDs = ExtractIDs(inventory.Items);
+        if (framecount % saveInterval == 0)
+        {
+            saveMode = true;
+        }
+        
+        if (saveMode && GetComponent<PlayerPlatformerController>().IsGrounded()) {
+            itemIDs = ExtractIDs(inventory.Items);
+            lastCheckPoint = player.position;
+            saveMode = false;
+        }
+        framecount++;
+
     }
 
     public List<int> ExtractIDs(List<GameObject> goList)
@@ -44,8 +60,9 @@ public class Saver : MonoBehaviour
         return localIDs;
     }
 
-    public void reloadInventory()
+    public void reloadCheckPoint()
     {
+
         List<int> keysToAdd = new List<int>();
         foreach (LockObject lockObject in locks) {
             if (!(lockObject.keyIdUsed == -1) && !lockObject.isOpen) // Lock is closed and has a key in it.
@@ -60,12 +77,9 @@ public class Saver : MonoBehaviour
                 }
             }
 
-
-            //if (!pickupObjects.Contains(key) && !lockObject.isOpen && lockObject.firstOpen) {
-            // You don't have the key and the door is open and the door has been opened before
-            // so we give you back the key and close the door
-            //    inventory.AddItem
         }
+        // Reassign player position
+        player.position = lastCheckPoint;
 
     }
 

@@ -47,6 +47,11 @@ public class PlayerPlatformerController : UnitController
             if (lockInRange != null)
                 UseLock();
         }
+
+        if (Input.GetKeyDown(KeyCode.Q) && grounded && !jumping && jumpCount == 0)
+        {
+            DropItem();
+        }
     }
 
     protected override void ComputeVelocity()
@@ -143,15 +148,17 @@ public class PlayerPlatformerController : UnitController
         inventory.AddItem(pickUpObject);
         pickUpObject = null;
     }
-
-
+    
     private void UseLock()
     {
         // Close it
         if (lockInRange.isOpen)
         {
             if (inventory.CheckInventoryFull())
+            {
+                Debug.Log("Max inventory is 3");
                 return;
+            }
             
             int idToAdd = lockInRange.Close();
 
@@ -166,8 +173,51 @@ public class PlayerPlatformerController : UnitController
             if (tryKey < 0)
                 return;
 
-            inventory.RemoveItem(tryKey, lockInRange);
+            inventory.UseItem(tryKey, lockInRange);
         }
+    }
+
+    private void DropItem()
+    {
+        if (inventory.CheckInventoryEmpty())
+        {
+            Debug.Log("no items to drop");
+            return;
+        }
+
+        Vector2 dir = Vector2.zero;
+
+        if (spriteRenderer.flipX)
+            dir = Vector2.right;
+        else
+            dir = Vector2.left;
+
+        // raycast right first
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, 1f, ~LayerMask.NameToLayer("Player"));
+
+        Debug.DrawRay(transform.position, dir, Color.yellow);
+
+        if (!hit)
+        {
+            Vector2 newPos = new Vector2(transform.position.x + 0.75f * dir.x, transform.position.y);
+            inventory.DropItem(newPos);
+            return;
+        }
+
+        dir = -dir;
+
+        hit = Physics2D.Raycast(transform.position, dir, 1f, ~LayerMask.NameToLayer("Player"));
+
+        Debug.DrawRay(transform.position, dir, Color.yellow);
+
+        if (!hit)
+        {
+            Vector2 newPos = new Vector2(transform.position.x + 0.75f * dir.x, transform.position.y);
+            inventory.DropItem(newPos);
+            return;
+        }
+
+        Debug.Log("Can't drop item here");
     }
 
     /* Wall Jump Concepting

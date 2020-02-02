@@ -21,13 +21,11 @@ using UnityEngine;
 
 public class PickUpObject : MonoBehaviour
 {
-    public Collider2D myCollider;
     public Animator anim;
     public GameObject interactionSensor;
     public SpriteRenderer rend;
     public float dampTime = 0.15f;
 
-    private Vector3 startPosition;
     public int id;
     private bool isHeld = false;
     private Transform playerTransform;
@@ -40,7 +38,6 @@ public class PickUpObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        startPosition = transform.position;
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         player = playerTransform.GetComponent<PlayerPlatformerController>();
         anim.enabled = false;
@@ -67,9 +64,10 @@ public class PickUpObject : MonoBehaviour
             Follow();
     }
 
-    public void Init(int id)
+    public void Init(int id, Vector2 pos)
     {
         this.id = id;
+        transform.position = pos;
 
         Start();
     }
@@ -78,7 +76,6 @@ public class PickUpObject : MonoBehaviour
     {
         gameObject.SetActive(true);
         isHeld = true;
-        myCollider.enabled = false;
         transform.localScale = new Vector2(.25f, .25f);
         transform.SetParent(newParent);
         anim.enabled = true;

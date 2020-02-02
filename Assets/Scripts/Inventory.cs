@@ -39,12 +39,12 @@ public class Inventory : MonoBehaviour
         }
 
         GameObject instance = Instantiate(pickUpObjectPrefab);
-        instance.GetComponent<PickUpObject>().Init(id);
+        instance.GetComponent<PickUpObject>().Init(id, Vector2.zero);
         instance.GetComponent<PickUpObject>().PickUp(transform, slotPositions[items.Count]);
         items.Add(instance);
     }
 
-    public void RemoveItem(int id, LockObject lockObject)
+    public void UseItem(int id, LockObject lockObject)
     {
         foreach (GameObject item in items)
         {
@@ -58,6 +58,19 @@ public class Inventory : MonoBehaviour
                 return;
             }
         }
+    }
+
+    public void DropItem(Vector2 dropSpot)
+    {
+        int id = items[0].GetComponent<PickUpObject>().Id;
+
+        items[0].GetComponent<PickUpObject>().DestroyIt();
+
+        items.RemoveAt(0);
+        UpdatePositions();
+
+        GameObject instance = Instantiate(pickUpObjectPrefab);
+        instance.GetComponent<PickUpObject>().Init(id, dropSpot);
     }
 
     public void RemoveAll()
@@ -79,6 +92,11 @@ public class Inventory : MonoBehaviour
     public bool CheckInventoryFull()
     {
         return items.Count >= MAX_ITEMS;
+    }
+
+    public bool CheckInventoryEmpty()
+    {
+        return items.Count == 0;
     }
 
     void UpdatePositions()

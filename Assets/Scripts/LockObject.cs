@@ -15,6 +15,7 @@ public class LockObject : MonoBehaviour
     public PickUpObject myObject;
     Animator anim;
     int keyIdUsed = -1;
+    bool firstOpen = false;
     // Enemy[] myEnemies
     
     // Start is called before the first frame update
@@ -38,6 +39,12 @@ public class LockObject : MonoBehaviour
 
                     isOpen = true;
                     anim.SetTrigger("Open");
+
+                    if (!firstOpen)
+                    {
+                        firstOpen = true;
+                        // trigger text
+                    }
 
                     return keyIdUsed;
                 }

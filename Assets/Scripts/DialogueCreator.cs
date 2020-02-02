@@ -20,8 +20,6 @@ public class DialogueCreator : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-
-            DontDestroyOnLoad(gameObject);
         }
         else
         {

@@ -48,6 +48,7 @@ public class LockObject : MonoBehaviour
                     isOpen = true;
                     rend.sprite = openSprite;
                     myCollider.enabled = false;
+                    VictoryTracker.Instance.lockCount--;
 
                     if (!firstOpen)
                     {
@@ -73,6 +74,7 @@ public class LockObject : MonoBehaviour
         rend.sprite = closedSprite;
 
         keyIdUsed = -1;
+        VictoryTracker.Instance.lockCount++;
 
         GameObject temp = myObject.gameObject;
         myObject = null;

@@ -34,20 +34,6 @@ public class Inventory : MonoBehaviour
         Items.Add(item);
     }
 
-    public void AddItem(int id)
-    {
-        if (Items.Count > MAX_ITEMS)
-        {
-            Debug.Log("Max inventory is 3");
-            return;
-        }
-
-        GameObject instance = Instantiate(pickUpObjectPrefab);
-        instance.GetComponent<PickUpObject>().Init(id, Vector2.zero);
-        instance.GetComponent<PickUpObject>().PickUp(transform, slotPositions[Items.Count]);
-        Items.Add(instance);
-    }
-
     public void UseItem(int id, LockObject lockObject)
     {
         foreach (GameObject item in Items)
@@ -66,15 +52,15 @@ public class Inventory : MonoBehaviour
 
     public void DropItem(Vector2 dropSpot)
     {
-        int id = Items[0].GetComponent<PickUpObject>().Id;
+        PickUpObject puo = items[0].GetComponent<PickUpObject>();
+        int id = puo.Id;
 
-        Items[0].GetComponent<PickUpObject>().DestroyIt();
+        //items[0].GetComponent<PickUpObject>().DestroyIt();
 
         Items.RemoveAt(0);
         UpdatePositions();
 
-        GameObject instance = Instantiate(pickUpObjectPrefab);
-        instance.GetComponent<PickUpObject>().Init(id, dropSpot);
+        puo.Init(dropSpot);
     }
 
     public void DropItemByID(int id, Vector2 dropSpot)

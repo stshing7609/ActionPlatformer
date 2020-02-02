@@ -160,9 +160,9 @@ public class PlayerPlatformerController : UnitController
                 return;
             }
             
-            int idToAdd = lockInRange.Close();
+            GameObject objectToAdd = lockInRange.Close();
 
-            inventory.AddItem(idToAdd);
+            inventory.AddItem(objectToAdd);
         }
         else
         {

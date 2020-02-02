@@ -48,6 +48,9 @@ TagManager:
   - name: Platforms
     uniqueID: 3798067525
     locked: 0
+  - name: Pickups
+    uniqueID: 2911078067
+    locked: 0
   - name: Player
     uniqueID: 1459912803
     locked: 0

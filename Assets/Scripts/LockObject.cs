@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 // valid keys
 // sequence
@@ -12,6 +13,7 @@ public class LockObject : MonoBehaviour
     public bool isOpen = false;
     Collider2D myCollider;
     public int[] validKeys;
+    public Light2D[] lights;
     public PickUpObject myObject;
     public Sprite closedSprite;
     public Sprite openSprite;
@@ -26,11 +28,11 @@ public class LockObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        myCollider = GetComponent<Collider2D>();
         rend = GetComponent<SpriteRenderer>();
         rend.sprite = closedSprite;
-        myCollider = GetComponent<Collider2D>();
         myCollider.enabled = true;
-        //validKeys = new int[] { 0, 1, 2 };
+        DisableLights();
     }
 
     // takes in a set of keys
@@ -49,6 +51,7 @@ public class LockObject : MonoBehaviour
                     rend.sprite = openSprite;
                     myCollider.enabled = false;
                     VictoryTracker.Instance.lockCount--;
+                    EnableLights();
 
                     if (!firstOpen)
                     {
@@ -72,6 +75,7 @@ public class LockObject : MonoBehaviour
         isOpen = false;
         myCollider.enabled = true;
         rend.sprite = closedSprite;
+        DisableLights();
 
         keyIdUsed = -1;
         VictoryTracker.Instance.lockCount++;
@@ -80,5 +84,26 @@ public class LockObject : MonoBehaviour
         myObject = null;
 
         return temp;
+    }
+
+    void DisableLights()
+    {
+        if(lights.Length != 0)
+        {
+            foreach(Light2D light in lights)
+                light.enabled = false;
+        }
+    }
+
+    void EnableLights()
+    {
+        if (lights.Length != 0)
+        {
+            foreach (Light2D light in lights)
+            {
+                Debug.Log("WHY");
+                light.enabled = true;
+            }
+        }
     }
 }

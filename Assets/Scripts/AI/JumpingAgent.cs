@@ -32,7 +32,7 @@ public class JumpingAgent : AgentBase
         float intensity = Random.Range(0, 100f) / 100;
 
         action[0] = Random.Range(0, 3) - 1f - Mathf.Min((1 + intensity) * elasticity * delta.x, 1);
-        action[1] = Random.Range(0, 3) - 1f - Mathf.Min((1 + intensity) * elasticity * delta.y));
+        action[1] = Random.Range(0, 3) - 1f - Mathf.Min((1 + intensity) * elasticity * delta.y);
         action[2] = Random.Range(0, 10f) / 10 - .1f;
         action[3] = Random.Range(0, 10f) / 10 - .1f;
         return action;

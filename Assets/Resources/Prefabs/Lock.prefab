@@ -197,6 +197,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpen: 0
   myCollider: {fileID: 1594137337060581141}
+  validKeys: 
+  myObject: {fileID: 0}
 --- !u!95 &1594137337060581142
 Animator:
   serializedVersion: 3

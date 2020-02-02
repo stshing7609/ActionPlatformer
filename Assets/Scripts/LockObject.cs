@@ -12,6 +12,7 @@ public class LockObject : MonoBehaviour
     public bool isOpen = false;
     public Collider2D myCollider;
     public int[] validKeys;
+    public PickUpObject myObject;
     Animator anim;
     int keyIdUsed = -1;
     // Enemy[] myEnemies
@@ -54,6 +55,8 @@ public class LockObject : MonoBehaviour
 
         int temp = keyIdUsed;
         keyIdUsed = -1;
+
+        myObject.DestroyIt();
 
         return temp;
     }

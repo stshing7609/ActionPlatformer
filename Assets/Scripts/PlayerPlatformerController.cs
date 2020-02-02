@@ -166,7 +166,7 @@ public class PlayerPlatformerController : UnitController
             if (tryKey < 0)
                 return;
 
-            inventory.RemoveItem(tryKey);
+            inventory.RemoveItem(tryKey, lockInRange);
         }
     }
 

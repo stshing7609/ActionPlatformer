@@ -44,7 +44,7 @@ public class Inventory : MonoBehaviour
         items.Add(instance);
     }
 
-    public void RemoveItem(int id)
+    public void RemoveItem(int id, LockObject lockObject)
     {
         foreach (GameObject item in items)
         {
@@ -52,7 +52,7 @@ public class Inventory : MonoBehaviour
 
             if (puo.Id == id)
             {
-                puo.Use();
+                puo.Use(lockObject);
                 items.Remove(item);
                 UpdatePositions();
                 return;

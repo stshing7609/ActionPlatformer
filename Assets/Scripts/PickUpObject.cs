@@ -83,6 +83,7 @@ public class PickUpObject : MonoBehaviour
         transform.SetParent(newParent);
         anim.enabled = true;
         interactionSensor.SetActive(false);
+        rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, 1);
 
         if(player.spriteRenderer.flipX)
             transform.localPosition = new Vector2(-newPos.x, newPos.y);
@@ -90,7 +91,17 @@ public class PickUpObject : MonoBehaviour
             transform.localPosition = newPos;
     }
 
-    public void Use()
+    public void Use(LockObject lockObject)
+    {
+        isHeld = false;
+        transform.SetParent(lockObject.transform);
+        transform.localPosition = Vector2.zero;
+        transform.localScale = new Vector2(.33f, .24f);
+        rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, .4f);
+        lockObject.myObject = this;
+    }
+
+    public void DestroyIt()
     {
         Destroy(gameObject);
     }

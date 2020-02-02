@@ -41,20 +41,6 @@ public class PickUpObject : MonoBehaviour
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         player = playerTransform.GetComponent<PlayerPlatformerController>();
         anim.enabled = false;
-        switch(id)
-        {
-            case 0:
-                rend.color = new Color(0, 1, 0.2533984f, 1);
-                break;
-            case 1:
-                rend.color = new Color(0, 0.3429475f, 1, 1);
-                break;
-            case 2:
-                rend.color = new Color(1, 0.8929985f, 0, 1);
-                break;
-            default:
-                break;
-        }
     }
 
     // Update is called once per frame

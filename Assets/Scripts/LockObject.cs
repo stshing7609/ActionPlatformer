@@ -13,7 +13,11 @@ public class LockObject : MonoBehaviour
     public Collider2D myCollider;
     public int[] validKeys;
     public PickUpObject myObject;
-    Animator anim;
+    public Sprite closedSprite;
+    public Sprite openSprite;
+    SpriteRenderer renderer;
+
+
     int keyIdUsed = -1;
     bool firstOpen = false;
     // Enemy[] myEnemies
@@ -21,7 +25,8 @@ public class LockObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<Animator>();
+        renderer = GetComponent<SpriteRenderer>();
+        renderer.sprite = closedSprite;
         validKeys = new int[] { 0, 1, 2 };
     }
 
@@ -38,7 +43,8 @@ public class LockObject : MonoBehaviour
                     keyIdUsed = ids[i];
 
                     isOpen = true;
-                    anim.SetTrigger("Open");
+                    renderer.sprite = openSprite;
+                    myCollider.enabled = false;
 
                     if (!firstOpen)
                     {
@@ -58,7 +64,7 @@ public class LockObject : MonoBehaviour
     {
         isOpen = false;
         myCollider.enabled = true;
-        anim.SetTrigger("Close");
+        renderer.sprite = closedSprite;
 
         int temp = keyIdUsed;
         keyIdUsed = -1;
@@ -66,10 +72,5 @@ public class LockObject : MonoBehaviour
         myObject.DestroyIt();
 
         return temp;
-    }
-
-    public void Hide()
-    {
-        myCollider.enabled = false;
     }
 }

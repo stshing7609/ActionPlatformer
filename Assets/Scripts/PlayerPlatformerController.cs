@@ -32,10 +32,14 @@ public class PlayerPlatformerController : UnitController
     {
         animator = GetComponent<Animator>();
         myCollider = GetComponent<BoxCollider2D>();
-        inventory = transform.Find("Inventory").GetComponent<Inventory>();
+        // inventory = transform.Find("Inventory").GetComponent<Inventory>();
         jumpForgivenessTime = Time.deltaTime * 4;
     }
 
+    public bool IsGrounded()
+    {
+        return grounded;
+    }
     protected override void Update()
     {
         base.Update();

@@ -7,6 +7,7 @@ public abstract class AgentBase : Agent
     private States states; // This stores the GameObject's action state.
     private Rigidbody2D rBody; // We need a reference to this to perform kinematic operations on the GameObject.
     public Vector2 initial_position = new Vector2(0, 0);
+    public float moveInterval = 30;
     private float[] lastAction;
     private int framecount = 0;
     private void Start()
@@ -69,7 +70,7 @@ public abstract class AgentBase : Agent
      * to simulate that behavior.
      */
     {
-        if (framecount % 30 == 0)
+        if (framecount % moveInterval == 0)
         {
             lastAction = Heuristic();
         }

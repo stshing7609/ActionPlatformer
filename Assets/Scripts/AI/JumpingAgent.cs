@@ -24,9 +24,9 @@ public class JumpingAgent : AgentBase
         var action = new float[4];
 
         action[0] = Random.Range(0, 3)-1f;
-        action[1] = 3;
+        action[1] = Random.Range(0, 3)-1f;
         action[2] = Random.Range(0, 10f) / 10 - .1f;
-        action[3] = 0;
+        action[3] = Random.Range(0, 10f) / 10 - .1f;
         return action;
     }
 

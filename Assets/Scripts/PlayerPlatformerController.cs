@@ -19,6 +19,8 @@ public class PlayerPlatformerController : UnitController
     float jumpForgivenessTime;
     int jumpCount = 0;
 
+    bool interacting = false;
+
     bool stomping;
     float stompDuration = .25f;
     float stompCooldown = 1.5f;
@@ -64,14 +66,22 @@ public class PlayerPlatformerController : UnitController
         WallStick();
         //Stomp();
 
-        flipSprite = spriteRenderer.flipX ? move.x < -MIN_MOVE_DISTANCE : move.x > MIN_MOVE_DISTANCE;
+        flipSprite = spriteRenderer.flipX ? move.x > MIN_MOVE_DISTANCE : move.x < -MIN_MOVE_DISTANCE;
         if (flipSprite)
         {
             Flip();
         }
 
         animator.SetBool("grounded", grounded);
+        animator.SetBool("wallsticking", wallStick);
+        animator.SetBool("jumping", jumping);
         animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / maxSpeed);
+        animator.SetFloat("velocityY", velocity.y);
+
+        if (interacting)
+            animator.SetTrigger("interact");
+
+        interacting = false;
 
         targetVelocity = move * maxSpeed;
     }
@@ -147,10 +157,13 @@ public class PlayerPlatformerController : UnitController
     {
         inventory.AddItem(pickUpObject);
         pickUpObject = null;
+        interacting = true;
     }
     
     private void UseLock()
     {
+        interacting = true;
+        
         // Close it
         if (lockInRange.isOpen)
         {
@@ -187,7 +200,7 @@ public class PlayerPlatformerController : UnitController
 
         Vector2 dir = Vector2.zero;
 
-        if (spriteRenderer.flipX)
+        if (!spriteRenderer.flipX)
             dir = Vector2.right;
         else
             dir = Vector2.left;

@@ -10,7 +10,7 @@ public class PatrollingJumpingAgent : JumpingAgent
      * to a character in our game.
      */ 
 {
-    public Vector2 patrolCenter;
+    public float elasticity = 1;
     public override void ComputeReward()
     {
         float distanceToTarget = Vector2.Distance(
@@ -22,6 +22,7 @@ public class PatrollingJumpingAgent : JumpingAgent
 
     public override float[] Heuristic()
     {
+        Vector2 patrolCenter = initial_position;
         var action = new float[4];
         Vector2 currentPosition;
         currentPosition.x = transform.position.x;
@@ -29,8 +30,8 @@ public class PatrollingJumpingAgent : JumpingAgent
         Vector2 delta = currentPosition - patrolCenter;
         float intensity = Random.Range(0, 100f) / 100;
 
-        action[0] = Random.Range(0, 3)-1f - intensity * delta.x;
-        action[1] = Random.Range(0, 3)-1f - intensity * delta.y;
+        action[0] = Random.Range(0, 3)-1f - (1+intensity) * elasticity * delta.x;
+        action[1] = Random.Range(0, 3)-1f - (1+intensity) * elasticity * delta.y;
         action[2] = Random.Range(0, 10f) / 10 - .1f;
         action[3] = Random.Range(0, 10f) / 10 - .1f;
         return action;

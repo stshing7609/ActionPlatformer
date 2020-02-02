@@ -2997,8 +2997,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxStep: 0
-  initial_position: {x: 0, y: 0}
-  moveInterval: 30
+  initial_position: {x: 0, y: 5.5}
+  moveInterval: 45
   Target: {fileID: 819525650}
 --- !u!1 &819525649
 GameObject:
@@ -3336,7 +3336,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxStep: 0
   initial_position: {x: 0, y: 0}
-  moveInterval: 60
+  moveInterval: 70
   Target: {fileID: 819525650}
 --- !u!114 &1457854551
 MonoBehaviour:
@@ -3567,6 +3567,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1664464558 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4178789854419897245, guid: f757acb3e73eca84ea4180d36d759702,
+    type: 3}
+  m_PrefabInstance: {fileID: 522312681}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1664464559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664464558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb70e46ea992afd4e8dd70d118e61580, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxStep: 0
+  initial_position: {x: 0, y: 0}
+  moveInterval: 60
+  Target: {fileID: 819525650}
 --- !u!1 &1858886602
 GameObject:
   m_ObjectHideFlags: 0
@@ -3694,7 +3716,7 @@ PrefabInstance:
     - target: {fileID: 6846734889723209896, guid: 08006b83cd5e7c04cb616d4da36c7cda,
         type: 3}
       propertyPath: moveInterval
-      value: 60
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 8521765750480709316, guid: 08006b83cd5e7c04cb616d4da36c7cda,
         type: 3}
@@ -4040,7 +4062,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4178789854074069778}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: -3.5, z: 0}
+  m_LocalPosition: {x: -4, y: 5.5, z: 0}
   m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_Children:
   - {fileID: 3396978783069764788}

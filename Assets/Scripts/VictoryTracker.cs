@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class VictoryTracker : MonoBehaviour
 {
@@ -22,5 +23,11 @@ public class VictoryTracker : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.Return))
+            SceneManager.LoadScene(0);
     }
 }

@@ -10,12 +10,12 @@ using UnityEngine;
 public class LockObject : MonoBehaviour
 {
     public bool isOpen = false;
-    public Collider2D myCollider;
+    Collider2D myCollider;
     public int[] validKeys;
     public PickUpObject myObject;
     public Sprite closedSprite;
     public Sprite openSprite;
-    SpriteRenderer renderer;
+    SpriteRenderer rend;
 
 
     int keyIdUsed = -1;
@@ -25,9 +25,10 @@ public class LockObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        renderer = GetComponent<SpriteRenderer>();
-        renderer.sprite = closedSprite;
-        validKeys = new int[] { 0, 1, 2 };
+        rend = GetComponent<SpriteRenderer>();
+        rend.sprite = closedSprite;
+        myCollider = GetComponent<Collider2D>();
+        //validKeys = new int[] { 0, 1, 2 };
     }
 
     // takes in a set of keys
@@ -43,7 +44,7 @@ public class LockObject : MonoBehaviour
                     keyIdUsed = ids[i];
 
                     isOpen = true;
-                    renderer.sprite = openSprite;
+                    rend.sprite = openSprite;
                     myCollider.enabled = false;
 
                     if (!firstOpen)
@@ -60,16 +61,16 @@ public class LockObject : MonoBehaviour
         return -1;
     }
 
-    public int Close()
+    public GameObject Close()
     {
         isOpen = false;
         myCollider.enabled = true;
-        renderer.sprite = closedSprite;
+        rend.sprite = closedSprite;
 
-        int temp = keyIdUsed;
         keyIdUsed = -1;
 
-        myObject.DestroyIt();
+        GameObject temp = myObject.gameObject;
+        myObject = null;
 
         return temp;
     }

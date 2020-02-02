@@ -31,6 +31,7 @@ public class PickUpObject : MonoBehaviour
     private Transform playerTransform;
     private PlayerPlatformerController player;
     private Vector3 velocity = Vector3.zero;
+    private Vector3 startScale;
 
     public bool IsHeld { get => isHeld; }
     public int Id { get => id; }
@@ -40,6 +41,7 @@ public class PickUpObject : MonoBehaviour
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         player = playerTransform.GetComponent<PlayerPlatformerController>();
+        startScale = transform.localScale;
         anim.enabled = false;
     }
 
@@ -50,20 +52,30 @@ public class PickUpObject : MonoBehaviour
             Follow();
     }
 
-    public void Init(int id, Vector2 pos)
+    void ResetValues()
     {
-        this.id = id;
+        gameObject.SetActive(true);
+        transform.localScale = startScale;
+        rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, 1);
+        anim.enabled = false;
+        transform.parent = null;
+        isHeld = false;
+        interactionSensor.SetActive(true);
+    }
+
+    public void Init(Vector2 pos)
+    {
         transform.position = pos;
 
-        Start();
+        ResetValues();
     }
 
     public void PickUp(Transform newParent, Vector2 newPos)
     {
         gameObject.SetActive(true);
         isHeld = true;
-        transform.localScale = new Vector2(.25f, .25f);
         transform.SetParent(newParent);
+        transform.localScale = new Vector2(.33f, .33f);
         anim.enabled = true;
         interactionSensor.SetActive(false);
         rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, 1);
@@ -79,8 +91,8 @@ public class PickUpObject : MonoBehaviour
         isHeld = false;
         transform.SetParent(lockObject.transform);
         transform.localPosition = Vector2.zero;
-        transform.localScale = new Vector2(.33f, .24f);
-        rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, .4f);
+        transform.localScale = new Vector2(1, 1);
+        rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, .6f);
         lockObject.myObject = this;
     }
 

@@ -9,6 +9,7 @@ public class VictoryTracker : MonoBehaviour
     public static VictoryTracker Instance { get => instance; }
 
     public int lockCount = 12;
+    public GameObject winPanel;
 
     // Start is called before the first frame update
     void Awake()
@@ -23,6 +24,11 @@ public class VictoryTracker : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+    }
+
+    public void TriggerWin()
+    {
+        winPanel.SetActive(true);
     }
 
     private void Update()

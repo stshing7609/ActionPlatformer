@@ -12,13 +12,20 @@ public class DialogueRunner : MonoBehaviour
     private Queue<string> dialogueQueue;        // an array of string queues where we'll hold each speaker's dialogue sets
     private bool typing;                        // are we currently typing
     private string currSentence;                // store the current sentence
+    bool triggerWin = false;
 
-    public void Init(DialogueData data)
+    public void Init(DialogueData data, bool win)
     {
         StopAllCoroutines();
         dialogueQueue = new Queue<string>();
         dialogueData = data;
+        triggerWin = win;
         StartDialogue();
+    }
+
+    public void Init(DialogueData data)
+    {
+        Init(data, false);
     }
 
     void Update()
@@ -114,6 +121,8 @@ public class DialogueRunner : MonoBehaviour
     // End the dialogue
     void EndDialogue()
     {
+        if (triggerWin)
+            VictoryTracker.Instance.TriggerWin();
         Destroy(gameObject);
     }
 

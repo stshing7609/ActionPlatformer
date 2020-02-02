@@ -12,13 +12,17 @@ public class VictoryTrigger : MonoBehaviour
         if (collision.transform.CompareTag("Player"))
         {
             int show = -1;
+            bool win = false;
             if (VictoryTracker.Instance.lockCount <= 0)
+            {
                 show = winId;
+                win = true;
+            }
             else
                 show = lockId;
 
             
-            DialogueCreator.Instance.InitDialogue(show);
+            DialogueCreator.Instance.InitDialogue(show, win);
         }
     }
 }

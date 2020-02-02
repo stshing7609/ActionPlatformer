@@ -13,6 +13,7 @@ public class DialogueCreator : MonoBehaviour
     DialogueData[] allDialogueData;
 
     public GameObject dialogueBox;              // dialogue box prefab
+    public Transform dialogueHolder;
 
     private void Awake()
     {
@@ -30,18 +31,23 @@ public class DialogueCreator : MonoBehaviour
         LoadDataFromJSON(dialogueDataFileName);
     }
 
-    public void InitDialogue(int id)
+    public void InitDialogue(int id, bool win)
     {
         DialogueData data = allDialogueData[id];
 
         // only allow one instance of the dialogue box
         GameObject instance;
-        if(transform.childCount > 1)
-            instance = transform.GetChild(1).gameObject;
+        if (dialogueHolder.childCount > 0)
+            instance = dialogueHolder.GetChild(0).gameObject;
         else
-            instance = Instantiate(dialogueBox, transform);
+            instance = Instantiate(dialogueBox, dialogueHolder);
 
-        instance.GetComponent<DialogueRunner>().Init(data);
+        instance.GetComponent<DialogueRunner>().Init(data, win);
+    }
+
+    public void InitDialogue(int id)
+    {
+        InitDialogue(id, false);
     }
 
     private void LoadDataFromJSON(string fileName)

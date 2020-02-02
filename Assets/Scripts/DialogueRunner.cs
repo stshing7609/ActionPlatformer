@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class DialogueManager : MonoBehaviour
+public class DialogueRunner : MonoBehaviour
 {
     DialogueData dialogueData;
     
@@ -13,11 +13,11 @@ public class DialogueManager : MonoBehaviour
     private bool typing;                        // are we currently typing
     private string currSentence;                // store the current sentence
 
-    public void Init()
+    public void Init(DialogueData data)
     {
+        StopAllCoroutines();
         dialogueQueue = new Queue<string>();
-        dialogueData = new DialogueData();
-        dialogueData.lines = new string[] { "hi", "oh my god", "is this for real", "hello this is text. I am now here. Thank you. Good bye. Go away. I have now reached the aboslute limit of text that I can type and this is really as far as I can go, I s" };
+        dialogueData = data;
         StartDialogue();
     }
 
@@ -58,9 +58,7 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-
         // enqueue text
-
         typing = true;                          // we are now typing
         currSentence = dialogueQueue.Dequeue();     // remove the first sentence in the queue and set it to our current sentence
 
@@ -75,7 +73,7 @@ public class DialogueManager : MonoBehaviour
         typing = false;                                             // we're not typing out now
         textMesh.text = currSentence;    // reveal the entire sentence
 
-        StartCoroutine(Wait(2f));                                 // wait for 3 seconds before starting the next sentence
+        //StartCoroutine(Wait(2f));                                 // wait for 3 seconds before starting the next sentence
     }
 
     // Coroutine for typing out text letter by letter
@@ -98,11 +96,11 @@ public class DialogueManager : MonoBehaviour
         {
             StartCoroutine(Wait(3));
         }
-        // otherwise, wait 2 seconds
-        else
-        {
-            StartCoroutine(Wait(2));
-        }
+        //// otherwise, wait 2 seconds
+        //else
+        //{
+        //    StartCoroutine(Wait(2));
+        //}
     }
 
     // coroutine to delay dialogue advancing - param is the time in seconds that we want to wait for

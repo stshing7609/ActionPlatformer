@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class AllDialogueData : MonoBehaviour
+﻿[System.Serializable]
+public class AllDialogueData
 {
     public DialogueData[] allDialogueData;
 }

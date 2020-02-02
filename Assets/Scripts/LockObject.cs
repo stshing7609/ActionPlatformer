@@ -29,6 +29,7 @@ public class LockObject : MonoBehaviour
         rend = GetComponent<SpriteRenderer>();
         rend.sprite = closedSprite;
         myCollider = GetComponent<Collider2D>();
+        myCollider.enabled = true;
         //validKeys = new int[] { 0, 1, 2 };
     }
 

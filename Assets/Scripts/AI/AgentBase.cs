@@ -46,7 +46,6 @@ public abstract class AgentBase : Agent
         ComputeReward();
         states.horizontal_tilt = vectorAction[0];
         states.vertical_tilt = vectorAction[1];
-        print(states.horizontal_tilt);
         if (vectorAction[2] > .5)
         {
             states.jump_button_pressed = true;

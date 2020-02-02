@@ -211,7 +211,6 @@ MonoBehaviour:
   maxStep: 0
   initial_position: {x: 0, y: 0}
   Target: {fileID: 0}
-  speed: 3
 --- !u!114 &1885892299503625452
 MonoBehaviour:
   m_ObjectHideFlags: 0

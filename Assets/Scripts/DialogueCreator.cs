@@ -36,8 +36,8 @@ public class DialogueCreator : MonoBehaviour
 
         // only allow one instance of the dialogue box
         GameObject instance;
-        if(transform.childCount > 0)
-            instance = transform.GetChild(0).gameObject;
+        if(transform.childCount > 1)
+            instance = transform.GetChild(1).gameObject;
         else
             instance = Instantiate(dialogueBox, transform);
 

@@ -73,7 +73,7 @@ public class DialogueRunner : MonoBehaviour
         typing = false;                                             // we're not typing out now
         textMesh.text = currSentence;    // reveal the entire sentence
 
-        //StartCoroutine(Wait(2f));                                 // wait for 3 seconds before starting the next sentence
+        StartCoroutine(Wait(2f));                                 // wait for 3 seconds before starting the next sentence
     }
 
     // Coroutine for typing out text letter by letter
@@ -96,11 +96,11 @@ public class DialogueRunner : MonoBehaviour
         {
             StartCoroutine(Wait(3));
         }
-        //// otherwise, wait 2 seconds
-        //else
-        //{
-        //    StartCoroutine(Wait(2));
-        //}
+        // otherwise, wait 2 seconds
+        else
+        {
+            StartCoroutine(Wait(2));
+        }
     }
 
     // coroutine to delay dialogue advancing - param is the time in seconds that we want to wait for

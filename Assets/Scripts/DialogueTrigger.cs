@@ -12,8 +12,6 @@ public class DialogueTrigger : MonoBehaviour
         if (collision.transform.CompareTag("Player"))
         {
             DialogueCreator.Instance.InitDialogue(id);
-            if (onlyOnce)
-                Destroy(gameObject);
         }
     }
 }

@@ -10,20 +10,43 @@ public class PlayerPlatformerController : UnitController
     public float wallJumpTakeOffSpeed = 4;
     public float wallJumpImpulse = 2;
     public float wallFallSpeedMultiplier = 0.3f;
+    public float stompImpulse = -5;
+    public bool flipSprite;
+    public GameObject pickUpObject;
+    public LockObject lockInRange;
 
     Vector2 move;
     float jumpForgivenessTime;
     int jumpCount = 0;
 
+    bool stomping;
+    float stompDuration = .25f;
+    float stompCooldown = 1.5f;
+
     private Animator animator;
     private BoxCollider2D myCollider;
+    private Inventory inventory;
 
     // Use this for initialization
     void Awake()
     {
         animator = GetComponent<Animator>();
         myCollider = GetComponent<BoxCollider2D>();
+        inventory = transform.Find("Inventory").GetComponent<Inventory>();
         jumpForgivenessTime = Time.deltaTime * 4;
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+           if(pickUpObject != null)
+                PickUp();
+
+            if (lockInRange != null)
+                UseLock();
+        }
     }
 
     protected override void ComputeVelocity()
@@ -33,9 +56,10 @@ public class PlayerPlatformerController : UnitController
         move.x = Input.GetAxis("Horizontal");
 
         CalculateJump();
-        CalculateWallStick();
+        WallStick();
+        //Stomp();
 
-        bool flipSprite = spriteRenderer.flipX ? move.x < -MIN_MOVE_DISTANCE : move.x > MIN_MOVE_DISTANCE;
+        flipSprite = spriteRenderer.flipX ? move.x < -MIN_MOVE_DISTANCE : move.x > MIN_MOVE_DISTANCE;
         if (flipSprite)
         {
             Flip();
@@ -103,7 +127,7 @@ public class PlayerPlatformerController : UnitController
             jumpCount = 0;
     }
 
-    private void CalculateWallStick()
+    private void WallStick()
     {
         if (!wallStick || velocity.y > MIN_MOVE_DISTANCE)
         {
@@ -113,6 +137,39 @@ public class PlayerPlatformerController : UnitController
 
         gravityModifier = wallFallSpeedMultiplier;
     }
+
+    private void PickUp()
+    {
+        inventory.AddItem(pickUpObject);
+        pickUpObject = null;
+    }
+
+
+    private void UseLock()
+    {
+        // Close it
+        if (lockInRange.isOpen)
+        {
+            if (inventory.CheckInventoryFull())
+                return;
+            
+            int idToAdd = lockInRange.Close();
+
+            inventory.AddItem(idToAdd);
+        }
+        else
+        {
+            int tryKey = -1;
+
+            tryKey = lockInRange.Open(inventory.GetItemIds());
+            // no valid key is possessed
+            if (tryKey < 0)
+                return;
+
+            inventory.RemoveItem(tryKey, lockInRange);
+        }
+    }
+
     /* Wall Jump Concepting
      * Find left and right contacts of player collider
      * Make sure not grounded
@@ -125,4 +182,61 @@ public class PlayerPlatformerController : UnitController
      * Allow jump while wall sticking
      * If player lets go of direction towards wall, set wallSticking to false and free fall
      * */
+
+    /* Stomp Action
+     * 
+     * To Stomp, the player must first be airborne
+     * The stomp action has a cooldown
+     * The stomp action applies force to the character downward
+     * */
+    private void Stomp()
+    {      
+        if (stomping || grounded)
+        {
+            if (grounded)
+            {
+                StopCoroutine("StompLength");
+                StopCoroutine("StompCountdown");
+                gravityModifier = 1;
+                stomping = false;
+            }
+            return;
+        }
+            
+        if(Input.GetButtonDown("Vertical") && Input.GetAxis("Vertical") < -MIN_MOVE_DISTANCE)
+        {
+            velocity.y += stompImpulse;
+            gravityModifier = 0;
+            stomping = true;
+            StartCoroutine("StompLength");
+        }
+    }
+
+    IEnumerator StompLength()
+    {
+        float timer = 0;
+        
+        while(timer < stompDuration)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        gravityModifier = 1;
+        velocity.y -= stompImpulse;
+        StartCoroutine("StompCountdown");
+    }
+
+    IEnumerator StompCountdown()
+    {
+        float timer = 0;
+
+        while (timer < stompCooldown)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        stomping = false;
+    }
 }

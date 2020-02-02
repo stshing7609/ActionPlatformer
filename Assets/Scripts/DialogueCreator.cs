@@ -5,22 +5,45 @@ using System.IO;
 
 public class DialogueCreator : MonoBehaviour
 {
+    private static DialogueCreator instance;
+    public static DialogueCreator Instance { get => instance; }
+
     private const string dialogueDataFileName = "data_dialogues.json";
 
     DialogueData[] allDialogueData;
 
     public GameObject dialogueBox;              // dialogue box prefab
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        InitDialogue();
+        //Establish Singleton Pattern
+        if (instance == null)
+        {
+            instance = this;
+
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        LoadDataFromJSON(dialogueDataFileName);
     }
 
-    void InitDialogue()
+    public void InitDialogue(int id)
     {
-        GameObject instance = Instantiate(dialogueBox, transform);
-        instance.GetComponent<DialogueManager>().Init();
+        DialogueData data = allDialogueData[id];
+
+        // only allow one instance of the dialogue box
+        GameObject instance;
+        if(transform.childCount > 0)
+            instance = transform.GetChild(0).gameObject;
+        else
+            instance = Instantiate(dialogueBox, transform);
+
+        instance.GetComponent<DialogueRunner>().Init(data);
     }
 
     private void LoadDataFromJSON(string fileName)
@@ -32,8 +55,11 @@ public class DialogueCreator : MonoBehaviour
 
         // Pass the json to JsonUtility, and tell it to create a GameData object from it
         AllDialogueData loadedData = JsonUtility.FromJson<AllDialogueData>(dataAsJson);
+        Debug.Log(loadedData.allDialogueData != null);
 
         // Retrieve the allChapterData property of loadedData
         allDialogueData = loadedData.allDialogueData;
+
+        Debug.Log(allDialogueData != null);
     }
 }

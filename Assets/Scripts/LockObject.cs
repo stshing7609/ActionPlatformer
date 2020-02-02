@@ -15,8 +15,9 @@ public class LockObject : MonoBehaviour
     public PickUpObject myObject;
     public Sprite closedSprite;
     public Sprite openSprite;
+    public int cannotOpenDialogueId = -1;
+    public int openedDialogueId = -1;
     SpriteRenderer rend;
-
 
     int keyIdUsed = -1;
     bool firstOpen = false;
@@ -50,13 +51,16 @@ public class LockObject : MonoBehaviour
                     if (!firstOpen)
                     {
                         firstOpen = true;
-                        // trigger text
+                        if(openedDialogueId >= 0)
+                            DialogueCreator.Instance.InitDialogue(openedDialogueId);
                     }
 
                     return keyIdUsed;
                 }
             }
         }
+        
+        DialogueCreator.Instance.InitDialogue(cannotOpenDialogueId);
 
         return -1;
     }

@@ -19,7 +19,7 @@ public class LockObject : MonoBehaviour
     public int openedDialogueId = -1;
     SpriteRenderer rend;
 
-    int keyIdUsed = -1;
+    public int keyIdUsed { get; private set; } = -1;
     bool firstOpen = false;
     // Enemy[] myEnemies
     

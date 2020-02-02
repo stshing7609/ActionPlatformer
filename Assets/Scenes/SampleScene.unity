@@ -321,6 +321,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Point Light 2D
       objectReference: {fileID: 0}
+    - target: {fileID: 7588353759911828562, guid: e76b05a0ebf964146977bdcfbb7b8416,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7588353759911828572, guid: e76b05a0ebf964146977bdcfbb7b8416,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -549,6 +554,16 @@ PrefabInstance:
       propertyPath: m_Color.b
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8000107145084624256, guid: d71721d66f331264f8f7c71e661b58b5,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -496899771
+      objectReference: {fileID: 0}
+    - target: {fileID: 8000107145084624256, guid: d71721d66f331264f8f7c71e661b58b5,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d71721d66f331264f8f7c71e661b58b5, type: 3}
 --- !u!1001 &1055710822
@@ -721,6 +736,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.b
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8000107145084624256, guid: d71721d66f331264f8f7c71e661b58b5,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -496899771
+      objectReference: {fileID: 0}
+    - target: {fileID: 8000107145084624256, guid: d71721d66f331264f8f7c71e661b58b5,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d71721d66f331264f8f7c71e661b58b5, type: 3}
@@ -1226,6 +1251,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.b
       value: 0.25339842
+      objectReference: {fileID: 0}
+    - target: {fileID: 8000107145084624256, guid: d71721d66f331264f8f7c71e661b58b5,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+    - target: {fileID: 8000107145084624256, guid: d71721d66f331264f8f7c71e661b58b5,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -496899771
+      objectReference: {fileID: 0}
+    - target: {fileID: 8000107145084624256, guid: d71721d66f331264f8f7c71e661b58b5,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d71721d66f331264f8f7c71e661b58b5, type: 3}

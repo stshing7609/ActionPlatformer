@@ -4,7 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using MLAgents;
 
-public class WalkingAgent : AgentBase
+public class Jumping : AgentBase
     /* Implements an agent that walks around randomly.
      * This is just to demonstrate attaching an agent class script
      * to a character in our game.
@@ -25,7 +25,7 @@ public class WalkingAgent : AgentBase
 
         action[0] = Random.Range(0, 3)-1f;
         action[1] = 3;
-        action[2] = 0;
+        action[2] = Random.Range(0, 10) / 10 - .2f;
         action[3] = 0;
         return action;
     }

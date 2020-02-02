@@ -55,11 +55,8 @@ public class DialogueCreator : MonoBehaviour
 
         // Pass the json to JsonUtility, and tell it to create a GameData object from it
         AllDialogueData loadedData = JsonUtility.FromJson<AllDialogueData>(dataAsJson);
-        Debug.Log(loadedData.allDialogueData != null);
 
         // Retrieve the allChapterData property of loadedData
         allDialogueData = loadedData.allDialogueData;
-
-        Debug.Log(allDialogueData != null);
     }
 }

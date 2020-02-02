@@ -52,7 +52,7 @@ public class Inventory : MonoBehaviour
 
     public void DropItem(Vector2 dropSpot)
     {
-        PickUpObject puo = items[0].GetComponent<PickUpObject>();
+        PickUpObject puo = Items[0].GetComponent<PickUpObject>();
         int id = puo.Id;
 
         //items[0].GetComponent<PickUpObject>().DestroyIt();
@@ -90,7 +90,7 @@ public class Inventory : MonoBehaviour
         }
 
         GameObject instance = Instantiate(pickUpObjectPrefab);
-        instance.GetComponent<PickUpObject>().Init(id, dropSpot);
+        instance.GetComponent<PickUpObject>().Init(dropSpot);
     }
     public void RemoveAll()
     {
@@ -126,10 +126,4 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void DropInventory()
-        /* Drops all items and returns them to their original position.
-         */
-    {
-
-    }
 }

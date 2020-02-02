@@ -15,11 +15,11 @@ public class LockObject : MonoBehaviour
     public PickUpObject myObject;
     public Sprite closedSprite;
     public Sprite openSprite;
+    public List<LockObject> dependentOpenGates; // These gates must be open to get to this gate from the spawn area
     SpriteRenderer rend;
 
-
-    int keyIdUsed = -1;
-    bool firstOpen = false;
+    public int keyIdUsed {get; private set;} = -1;
+    public bool firstOpen { get; private set; } = false;
     // Enemy[] myEnemies
     
     // Start is called before the first frame update

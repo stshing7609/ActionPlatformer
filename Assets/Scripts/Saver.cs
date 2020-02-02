@@ -19,6 +19,8 @@ public class Saver : MonoBehaviour
 
     public Transform player;
     private Inventory inventory;
+    public List<LockObject> locks = new List<LockObject>; // Must add each lock to this to track their states.
+    public List<GameObject> keys = new List<GameObject>; // Must add each key to this to track their states.
     private List<int> itemIDs;
     void Start()
     {
@@ -44,14 +46,27 @@ public class Saver : MonoBehaviour
 
     public void reloadInventory()
     {
-        // Reset inventory
-        inventory.Clear();
+        List<int> keysToAdd = new List<int>();
+        foreach (LockObject lockObject in locks) {
+            if (!(lockObject.keyIdUsed == -1) && !lockObject.isOpen) // Lock is closed and has a key in it.
+            {
+                // Get the key object and add it to inventory.
+                int keyID = lockObject.keyIdUsed;
+            }
+            foreach (GameObject key in keys)
+            {
+                if (keysToAdd.Contains(key.GetInstanceID())) {
+                    inventory.AddItem(key);
+                }
+            }
 
-        foreach (int itemID in itemIDs) 
-        {
-            inventory.AddItem(itemID);
+
+            //if (!pickupObjects.Contains(key) && !lockObject.isOpen && lockObject.firstOpen) {
+            // You don't have the key and the door is open and the door has been opened before
+            // so we give you back the key and close the door
+            //    inventory.AddItem
         }
-        
+
     }
 
     public void DropInventory()

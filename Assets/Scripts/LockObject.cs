@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 // valid keys
 // sequence
@@ -12,7 +13,7 @@ public class LockObject : MonoBehaviour
     public bool isOpen = false;
     Collider2D myCollider;
     public int[] validKeys;
-    public Light[] lights;
+    public Light2D[] lights;
     public PickUpObject myObject;
     public Sprite closedSprite;
     public Sprite openSprite;
@@ -49,7 +50,7 @@ public class LockObject : MonoBehaviour
                     isOpen = true;
                     rend.sprite = openSprite;
                     myCollider.enabled = false;
-                    EnableLightss();
+                    EnableLights();
 
                     if (!firstOpen)
                     {
@@ -85,19 +86,22 @@ public class LockObject : MonoBehaviour
 
     void DisableLights()
     {
-        if(lights != null)
+        if(lights.Length != 0)
         {
-            foreach(Light light in lights)
+            foreach(Light2D light in lights)
                 light.enabled = false;
         }
     }
 
-    void EnableLightss()
+    void EnableLights()
     {
-        if (lights != null)
+        if (lights.Length != 0)
         {
-            foreach (Light light in lights)
-                light.enabled = false;
+            foreach (Light2D light in lights)
+            {
+                Debug.Log("WHY");
+                light.enabled = true;
+            }
         }
     }
 }

@@ -774,12 +774,12 @@ PrefabInstance:
     - target: {fileID: 1594137337060581137, guid: 60f545dd73bb0694f8121570d2d3108f,
         type: 3}
       propertyPath: validKeys.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1594137337060581137, guid: 60f545dd73bb0694f8121570d2d3108f,
         type: 3}
       propertyPath: lights.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1594137337060581137, guid: 60f545dd73bb0694f8121570d2d3108f,
         type: 3}
@@ -1711,7 +1711,7 @@ GameObject:
   - component: {fileID: 102043649}
   - component: {fileID: 102043650}
   m_Layer: 0
-  m_Name: Point Light 2D (11)
+  m_Name: EastHallLight3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2724,6 +2724,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1594137337060581137, guid: 60f545dd73bb0694f8121570d2d3108f,
         type: 3}
+      propertyPath: lights.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1594137337060581137, guid: 60f545dd73bb0694f8121570d2d3108f,
+        type: 3}
       propertyPath: closedSprite
       value: 
       objectReference: {fileID: -8942512712160073876, guid: 5a0a8d05103698047806ec05333eeefe,
@@ -2749,6 +2754,21 @@ PrefabInstance:
       propertyPath: cannotOpenDialogueId
       value: 22
       objectReference: {fileID: 0}
+    - target: {fileID: 1594137337060581137, guid: 60f545dd73bb0694f8121570d2d3108f,
+        type: 3}
+      propertyPath: lights.Array.data[0]
+      value: 
+      objectReference: {fileID: 1926156130}
+    - target: {fileID: 1594137337060581137, guid: 60f545dd73bb0694f8121570d2d3108f,
+        type: 3}
+      propertyPath: lights.Array.data[1]
+      value: 
+      objectReference: {fileID: 1850148589}
+    - target: {fileID: 1594137337060581137, guid: 60f545dd73bb0694f8121570d2d3108f,
+        type: 3}
+      propertyPath: lights.Array.data[2]
+      value: 
+      objectReference: {fileID: 102043650}
     - target: {fileID: 1594137337060581140, guid: 60f545dd73bb0694f8121570d2d3108f,
         type: 3}
       propertyPath: m_SortingLayerID
@@ -14299,7 +14319,7 @@ GameObject:
   - component: {fileID: 1230755072}
   - component: {fileID: 1230755073}
   m_Layer: 0
-  m_Name: Point Light 2D (10)
+  m_Name: EastHallLight2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16339,7 +16359,7 @@ GameObject:
   - component: {fileID: 1485109523}
   - component: {fileID: 1485109524}
   m_Layer: 0
-  m_Name: Point Light 2D (2)
+  m_Name: EastHallLight1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17530,6 +17550,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1594137337060581137, guid: 60f545dd73bb0694f8121570d2d3108f,
         type: 3}
+      propertyPath: lights.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1594137337060581137, guid: 60f545dd73bb0694f8121570d2d3108f,
+        type: 3}
       propertyPath: closedSprite
       value: 
       objectReference: {fileID: -8942512712160073876, guid: 5a0a8d05103698047806ec05333eeefe,
@@ -17555,6 +17580,21 @@ PrefabInstance:
       propertyPath: cannotOpenDialogueId
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 1594137337060581137, guid: 60f545dd73bb0694f8121570d2d3108f,
+        type: 3}
+      propertyPath: lights.Array.data[0]
+      value: 
+      objectReference: {fileID: 1485109524}
+    - target: {fileID: 1594137337060581137, guid: 60f545dd73bb0694f8121570d2d3108f,
+        type: 3}
+      propertyPath: lights.Array.data[1]
+      value: 
+      objectReference: {fileID: 1230755073}
+    - target: {fileID: 1594137337060581137, guid: 60f545dd73bb0694f8121570d2d3108f,
+        type: 3}
+      propertyPath: lights.Array.data[2]
+      value: 
+      objectReference: {fileID: 102043650}
     - target: {fileID: 1594137337060581140, guid: 60f545dd73bb0694f8121570d2d3108f,
         type: 3}
       propertyPath: m_SortingLayerID
@@ -20400,7 +20440,7 @@ GameObject:
   - component: {fileID: 1850148588}
   - component: {fileID: 1850148589}
   m_Layer: 0
-  m_Name: Point Light 2D (3)
+  m_Name: Light2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20554,7 +20594,7 @@ GameObject:
   - component: {fileID: 1926156129}
   - component: {fileID: 1926156130}
   m_Layer: 0
-  m_Name: Point Light 2D (2)
+  m_Name: Light1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

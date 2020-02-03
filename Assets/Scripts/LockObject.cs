@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 // valid keys
 // sequence
@@ -10,10 +11,16 @@ using UnityEngine;
 public class LockObject : MonoBehaviour
 {
     public bool isOpen = false;
-    public Collider2D myCollider;
+    Collider2D myCollider;
     public int[] validKeys;
+    public Light2D[] lights;
     public PickUpObject myObject;
-    Animator anim;
+    public Sprite closedSprite;
+    public Sprite openSprite;
+    public int cannotOpenDialogueId = -1;
+    public int openedDialogueId = -1;
+    SpriteRenderer rend;
+
     int keyIdUsed = -1;
     bool firstOpen = false;
     // Enemy[] myEnemies
@@ -21,8 +28,11 @@ public class LockObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<Animator>();
-        validKeys = new int[] { 0, 1, 2 };
+        myCollider = GetComponent<Collider2D>();
+        rend = GetComponent<SpriteRenderer>();
+        rend.sprite = closedSprite;
+        //myCollider.enabled = true;
+        DisableLights();
     }
 
     // takes in a set of keys
@@ -38,38 +48,62 @@ public class LockObject : MonoBehaviour
                     keyIdUsed = ids[i];
 
                     isOpen = true;
-                    anim.SetTrigger("Open");
+                    rend.sprite = openSprite;
+                    myCollider.enabled = false;
+                    VictoryTracker.Instance.lockCount--;
+                    EnableLights();
 
                     if (!firstOpen)
                     {
                         firstOpen = true;
-                        // trigger text
+                        if(openedDialogueId >= 0)
+                            DialogueCreator.Instance.InitDialogue(openedDialogueId);
                     }
 
                     return keyIdUsed;
                 }
             }
         }
+        
+        DialogueCreator.Instance.InitDialogue(cannotOpenDialogueId);
 
         return -1;
     }
 
-    public int Close()
+    public GameObject Close()
     {
         isOpen = false;
         myCollider.enabled = true;
-        anim.SetTrigger("Close");
+        rend.sprite = closedSprite;
+        DisableLights();
 
-        int temp = keyIdUsed;
         keyIdUsed = -1;
+        VictoryTracker.Instance.lockCount++;
 
-        myObject.DestroyIt();
+        GameObject temp = myObject.gameObject;
+        myObject = null;
 
         return temp;
     }
 
-    public void Hide()
+    void DisableLights()
     {
-        myCollider.enabled = false;
+        if(lights.Length != 0)
+        {
+            foreach(Light2D light in lights)
+                light.enabled = false;
+        }
+    }
+
+    void EnableLights()
+    {
+        if (lights.Length != 0)
+        {
+            foreach (Light2D light in lights)
+            {
+                Debug.Log("WHY");
+                light.enabled = true;
+            }
+        }
     }
 }

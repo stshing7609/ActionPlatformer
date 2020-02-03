@@ -17117,6 +17117,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 596541736, guid: d1b56f3b6d545934185b7553f669b776, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 596541737, guid: d1b56f3b6d545934185b7553f669b776, type: 3}
       propertyPath: m_SizeDelta.x
       value: 300
@@ -17151,11 +17155,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 596541739, guid: d1b56f3b6d545934185b7553f669b776, type: 3}
       propertyPath: m_firstOverflowCharacterIndex
-      value: 12
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 596541739, guid: d1b56f3b6d545934185b7553f669b776, type: 3}
       propertyPath: m_textInfo.lineCount
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 596541739, guid: d1b56f3b6d545934185b7553f669b776, type: 3}
+      propertyPath: m_text
+      value: 'Broken Things : 12'
+      objectReference: {fileID: 0}
+    - target: {fileID: 596541739, guid: d1b56f3b6d545934185b7553f669b776, type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 596541739, guid: d1b56f3b6d545934185b7553f669b776, type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 596541739, guid: d1b56f3b6d545934185b7553f669b776, type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8842013215174567138, guid: d1b56f3b6d545934185b7553f669b776,
         type: 3}

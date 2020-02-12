@@ -101,7 +101,6 @@ public class LockObject : MonoBehaviour
         {
             foreach (Light2D light in lights)
             {
-                Debug.Log("WHY");
                 light.enabled = true;
             }
         }

@@ -10,7 +10,7 @@ public class Inventory : MonoBehaviour
 
     List<GameObject> items;
 
-    Vector2[] slotPositions = new Vector2[] { new Vector2(0.505f, 0.59f), new Vector2(0.75f, 0.125f), new Vector2(0.505f, -0.3f) };
+    Vector2[] slotPositions = new Vector2[] { new Vector2(-0.505f, 0.59f), new Vector2(-0.75f, 0.125f), new Vector2(-0.505f, -0.3f) };
     
     // Start is called before the first frame update
     void Start()

@@ -119,12 +119,6 @@ public class PickUpObject : MonoBehaviour
                 multiplier = -1;
 
             transform.localPosition = new Vector2(transform.localPosition.x * multiplier, transform.localPosition.y);
-            //transform.position = playerTransform.position + new Vector3(0.6f * multiplier, 0.375f, 0);
-            //Vector3 delta = playerTransform.position - new Vector3(0.5f, 0.5f, playerTransform.position.z);
-
-            //Vector3 destination = playerTransform.position + delta;
-
-            //transform.position = Vector3.SmoothDamp(transform.position, destination, ref velocity, dampTime);
         }
     }
 }

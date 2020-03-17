@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+public class FollowInventory : MonoBehaviour
 {
     const int MAX_ITEMS = 3;
 

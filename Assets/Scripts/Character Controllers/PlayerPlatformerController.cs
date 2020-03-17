@@ -27,14 +27,14 @@ public class PlayerPlatformerController : UnitController
 
     private Animator animator;
     private BoxCollider2D myCollider;
-    private Inventory inventory;
+    private FollowInventory inventory;
 
     // Use this for initialization
     void Awake()
     {
         animator = GetComponent<Animator>();
         myCollider = GetComponent<BoxCollider2D>();
-        inventory = transform.Find("Inventory").GetComponent<Inventory>();
+        inventory = transform.Find("Inventory").GetComponent<FollowInventory>();
         jumpForgivenessTime = Time.deltaTime * 4;
     }
 

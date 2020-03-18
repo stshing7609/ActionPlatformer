@@ -50,7 +50,7 @@ public class RoomController : MonoBehaviour
         while (elapsed <= 1)
         {
             elapsed += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsed / .75f);
+            float t = Mathf.Clamp01(elapsed / 5f);
             volume.weight = Mathf.Lerp(volume.weight, weight, t);
             yield return null;
         }

@@ -21,6 +21,8 @@ public class LockObject : MonoBehaviour
     public int openedDialogueId = -1;
     SpriteRenderer rend;
 
+    public RoomController room;
+
     int keyIdUsed = -1;
     bool firstOpen = false;
     // Enemy[] myEnemies
@@ -48,6 +50,8 @@ public class LockObject : MonoBehaviour
                     keyIdUsed = ids[i];
 
                     isOpen = true;
+                    if(room)
+                        room.FixRoom(isOpen);
                     rend.sprite = openSprite;
                     myCollider.enabled = false;
                     VictoryTracker.Instance.lockCount--;
@@ -73,6 +77,8 @@ public class LockObject : MonoBehaviour
     public GameObject Close()
     {
         isOpen = false;
+        if (room)
+            room.FixRoom(isOpen);
         myCollider.enabled = true;
         rend.sprite = closedSprite;
         DisableLights();

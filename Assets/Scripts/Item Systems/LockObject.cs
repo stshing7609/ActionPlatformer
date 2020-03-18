@@ -11,8 +11,7 @@ using UnityEngine.Experimental.Rendering.Universal;
 public class LockObject : MonoBehaviour
 {
     public bool isOpen = false;
-    Collider2D myCollider;
-    public int[] validKeys;
+    public KeyItems validKey;
     public Light2D[] lights;
     public PickUpObject myObject;
     public Sprite closedSprite;
@@ -21,6 +20,7 @@ public class LockObject : MonoBehaviour
     public int openedDialogueId = -1;
     SpriteRenderer rend;
 
+    Collider2D myCollider;
     int keyIdUsed = -1;
     bool firstOpen = false;
     // Enemy[] myEnemies
@@ -35,42 +35,23 @@ public class LockObject : MonoBehaviour
         DisableLights();
     }
 
-    // takes in a set of keys
-    // returns the index of the key used
-    public int Open(List<int> ids)
+    public void Open()
     {
-        for(int i = 0; i < ids.Count; i++)
+        isOpen = true;
+        rend.sprite = openSprite;
+        myCollider.enabled = false;
+        VictoryTracker.Instance.lockCount--;
+        EnableLights();
+
+        if (!firstOpen)
         {
-            for(int j = 0; j < validKeys.Length; j++)
-            {
-                if (ids[i] == validKeys[j])
-                {
-                    keyIdUsed = ids[i];
-
-                    isOpen = true;
-                    rend.sprite = openSprite;
-                    myCollider.enabled = false;
-                    VictoryTracker.Instance.lockCount--;
-                    EnableLights();
-
-                    if (!firstOpen)
-                    {
-                        firstOpen = true;
-                        if(openedDialogueId >= 0)
-                            DialogueCreator.Instance.InitDialogue(openedDialogueId);
-                    }
-
-                    return keyIdUsed;
-                }
-            }
+            firstOpen = true;
+            if (openedDialogueId >= 0)
+                DialogueCreator.Instance.InitDialogue(openedDialogueId);
         }
-        
-        DialogueCreator.Instance.InitDialogue(cannotOpenDialogueId);
-
-        return -1;
     }
 
-    public GameObject Close()
+    public KeyItems Close()
     {
         isOpen = false;
         myCollider.enabled = true;
@@ -80,10 +61,9 @@ public class LockObject : MonoBehaviour
         keyIdUsed = -1;
         VictoryTracker.Instance.lockCount++;
 
-        GameObject temp = myObject.gameObject;
         myObject = null;
 
-        return temp;
+        return validKey;
     }
 
     void DisableLights()

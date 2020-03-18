@@ -26,7 +26,7 @@ public class PickUpObject : MonoBehaviour
     public SpriteRenderer rend;
     public float dampTime = 0.15f;
 
-    public int id;
+    [SerializeField] KeyItems id;
     private bool isHeld = false;
     private Transform playerTransform;
     private PlayerPlatformerController player;
@@ -34,7 +34,7 @@ public class PickUpObject : MonoBehaviour
     private Vector3 startScale;
 
     public bool IsHeld { get => isHeld; }
-    public int Id { get => id; }
+    public KeyItems Id { get => id; }
 
     // Start is called before the first frame update
     void Start()
@@ -84,6 +84,29 @@ public class PickUpObject : MonoBehaviour
             transform.localPosition = new Vector2(-newPos.x, newPos.y);
         else
             transform.localPosition = newPos;
+    }
+
+    public void Use(KeyItems id, LockObject lockObject)
+    {
+        Sprite newSprite;
+
+        if (KeyObjectDictionary.keyItems.TryGetValue(id, out newSprite))
+        {
+            rend.sprite = newSprite;
+            anim.enabled = true;
+        }
+        else
+        {
+            return;
+        }
+
+        isHeld = false;
+        transform.SetParent(lockObject.transform);
+        transform.localPosition = Vector2.zero;
+        transform.localScale = new Vector2(1, 1);
+        rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, .6f);
+        anim.enabled = true;
+        lockObject.myObject = this;
     }
 
     public void Use(LockObject lockObject)

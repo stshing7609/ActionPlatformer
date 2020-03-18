@@ -27,14 +27,14 @@ public class PlayerPlatformerController : UnitController
 
     private Animator animator;
     private BoxCollider2D myCollider;
-    private FollowInventory inventory;
+    private HUDInventory inventory;
 
     // Use this for initialization
     void Awake()
     {
         animator = GetComponent<Animator>();
         myCollider = GetComponent<BoxCollider2D>();
-        inventory = transform.Find("Inventory").GetComponent<FollowInventory>();
+        inventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<HUDInventory>();
         jumpForgivenessTime = Time.deltaTime * 4;
     }
 
@@ -50,10 +50,10 @@ public class PlayerPlatformerController : UnitController
                 UseLock();
         }
 
-        if (Input.GetKeyDown(KeyCode.Q) && grounded && !jumping && jumpCount == 0)
-        {
-            DropItem();
-        }
+        //if (Input.GetKeyDown(KeyCode.Q) && grounded && !jumping && jumpCount == 0)
+        //{
+        //    DropItem();
+        //}
     }
 
     protected override void ComputeVelocity()
@@ -158,7 +158,8 @@ public class PlayerPlatformerController : UnitController
 
     private void PickUp()
     {
-        inventory.AddItem(pickUpObject);
+        inventory.AddItem(pickUpObject.GetComponent<PickUpObject>().Id);
+        Destroy(pickUpObject);
         pickUpObject = null;
         interacting = true;
     }
@@ -169,72 +170,73 @@ public class PlayerPlatformerController : UnitController
         
         // Close it
         if (lockInRange.isOpen)
+        {           
+            KeyItems keyToAdd = lockInRange.Close();
+
+            inventory.AddItem(keyToAdd);
+        }
+        else
         {
-            if (inventory.CheckInventoryFull())
+            if (inventory.UseItem(KeyItems.Toolbox, lockInRange))
             {
-                Debug.Log("Max inventory is 3");
-                return;
+                lockInRange.Open();
             }
-            
-            GameObject objectToAdd = lockInRange.Close();
+            else
+                DialogueCreator.Instance.InitDialogue(lockInRange.cannotOpenDialogueId);
 
-            inventory.AddItem(objectToAdd);
-        }
-        else
-        {
-            int tryKey = -1;
+            //int tryKey = -1;
 
-            tryKey = lockInRange.Open(inventory.GetItemIds());
-            // no valid key is possessed
-            if (tryKey < 0)
-                return;
+            //tryKey = lockInRange.Open(oldInventory.GetItemIds());
+            //// no valid key is possessed
+            //if (tryKey < 0)
+            //    return;
 
-            inventory.UseItem(tryKey, lockInRange);
+            //oldInventory.UseItem(tryKey, lockInRange);
         }
     }
 
-    private void DropItem()
-    {
-        if (inventory.CheckInventoryEmpty())
-        {
-            Debug.Log("no items to drop");
-            return;
-        }
+    //private void DropItem()
+    //{
+    //    if (oldInventory.CheckInventoryEmpty())
+    //    {
+    //        Debug.Log("no items to drop");
+    //        return;
+    //    }
 
-        Vector2 dir = Vector2.zero;
+    //    Vector2 dir = Vector2.zero;
 
-        if (!spriteRenderer.flipX)
-            dir = Vector2.right;
-        else
-            dir = Vector2.left;
+    //    if (!spriteRenderer.flipX)
+    //        dir = Vector2.right;
+    //    else
+    //        dir = Vector2.left;
 
-        // raycast right first
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, 1f, ~LayerMask.NameToLayer("Player"));
+    //    // raycast right first
+    //    RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, 1f, ~LayerMask.NameToLayer("Player"));
 
-        Debug.DrawRay(transform.position, dir, Color.yellow);
+    //    Debug.DrawRay(transform.position, dir, Color.yellow);
 
-        if (!hit)
-        {
-            Vector2 newPos = new Vector2(transform.position.x + 0.75f * dir.x, transform.position.y);
-            inventory.DropItem(newPos);
-            return;
-        }
+    //    if (!hit)
+    //    {
+    //        Vector2 newPos = new Vector2(transform.position.x + 0.75f * dir.x, transform.position.y);
+    //        oldInventory.DropItem(newPos);
+    //        return;
+    //    }
 
-        dir = -dir;
+    //    dir = -dir;
 
-        hit = Physics2D.Raycast(transform.position, dir, 1f, ~LayerMask.NameToLayer("Player"));
+    //    hit = Physics2D.Raycast(transform.position, dir, 1f, ~LayerMask.NameToLayer("Player"));
 
-        Debug.DrawRay(transform.position, dir, Color.yellow);
+    //    Debug.DrawRay(transform.position, dir, Color.yellow);
 
-        if (!hit)
-        {
-            Vector2 newPos = new Vector2(transform.position.x + 0.75f * dir.x, transform.position.y);
-            inventory.DropItem(newPos);
-            return;
-        }
+    //    if (!hit)
+    //    {
+    //        Vector2 newPos = new Vector2(transform.position.x + 0.75f * dir.x, transform.position.y);
+    //        oldInventory.DropItem(newPos);
+    //        return;
+    //    }
 
-        Debug.Log("Can't drop item here");
-    }
+    //    Debug.Log("Can't drop item here");
+    //}
 
     /* Wall Jump Concepting
      * Find left and right contacts of player collider

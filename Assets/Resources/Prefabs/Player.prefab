@@ -228,7 +228,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1996545802635017399}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 910ab411d243c684e8d21091072330fe, type: 3}
+  m_Script: {fileID: 11500000, guid: 12ac8c1a5272b1c4ab0c1d7c8f45559b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pickUpObjectPrefab: {fileID: 8000107144399984017, guid: d71721d66f331264f8f7c71e661b58b5,
@@ -262,7 +262,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1996545803190897950}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: -6.200001, y: -7.4800005, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1996545803362794597}

@@ -18,8 +18,9 @@ public class LockObject : MonoBehaviour
     public Sprite openSprite;
     public int cannotOpenDialogueId = -1;
     public int openedDialogueId = -1;
-    SpriteRenderer rend;
+    public RoomController room;
 
+    SpriteRenderer rend;
     Collider2D myCollider;
     int keyIdUsed = -1;
     bool firstOpen = false;
@@ -38,6 +39,10 @@ public class LockObject : MonoBehaviour
     public void Open()
     {
         isOpen = true;
+
+        if (room)
+            room.FixRoom(isOpen);
+
         rend.sprite = openSprite;
         myCollider.enabled = false;
         VictoryTracker.Instance.lockCount--;
@@ -54,6 +59,8 @@ public class LockObject : MonoBehaviour
     public KeyItems Close()
     {
         isOpen = false;
+        if (room)
+            room.FixRoom(isOpen);
         myCollider.enabled = true;
         rend.sprite = closedSprite;
         DisableLights();

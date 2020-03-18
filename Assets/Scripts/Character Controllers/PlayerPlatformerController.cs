@@ -28,6 +28,7 @@ public class PlayerPlatformerController : UnitController
     private Animator animator;
     private BoxCollider2D myCollider;
     private HUDInventory inventory;
+    private KeyItems selectedItem;
 
     // Use this for initialization
     void Awake()
@@ -36,6 +37,7 @@ public class PlayerPlatformerController : UnitController
         myCollider = GetComponent<BoxCollider2D>();
         inventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<HUDInventory>();
         jumpForgivenessTime = Time.deltaTime * 4;
+        selectedItem = KeyItems.HotChocolate; // do this so that if we reset, the value is something that can't be used to escape the room
     }
 
     protected override void Update()
@@ -54,6 +56,9 @@ public class PlayerPlatformerController : UnitController
         //{
         //    DropItem();
         //}
+
+        if(Input.GetKeyDown(KeyCode.Q))
+            SelectItem();
     }
 
     protected override void ComputeVelocity()
@@ -158,6 +163,12 @@ public class PlayerPlatformerController : UnitController
 
     private void PickUp()
     {
+        // if our inventory is empty, set our selectedItem to what we just picked up
+        if(inventory.CheckInventoryEmpty())
+        {
+            selectedItem = pickUpObject.GetComponent<PickUpObject>().Id;
+        }
+        
         inventory.AddItem(pickUpObject.GetComponent<PickUpObject>().Id);
         Destroy(pickUpObject);
         pickUpObject = null;
@@ -177,9 +188,14 @@ public class PlayerPlatformerController : UnitController
         }
         else
         {
-            if (inventory.UseItem(KeyItems.Toolbox, lockInRange))
+            bool[] checks = inventory.UseItem(selectedItem, lockInRange);
+
+            // check if the item can be used
+            if (checks[0]) 
             {
-                lockInRange.Open();
+                // if it's the last of that item, then change the display
+                if(checks[1])
+                    SelectItem();
             }
             else
                 DialogueCreator.Instance.InitDialogue(lockInRange.cannotOpenDialogueId);
@@ -193,6 +209,15 @@ public class PlayerPlatformerController : UnitController
 
             //oldInventory.UseItem(tryKey, lockInRange);
         }
+    }
+
+    private void SelectItem()
+    {
+        // don't select any item if the inventory is empty
+        if (inventory.CheckInventoryEmpty())
+            return;
+
+        selectedItem = inventory.SelectItem();
     }
 
     //private void DropItem()

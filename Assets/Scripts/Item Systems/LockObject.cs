@@ -13,7 +13,7 @@ public class LockObject : MonoBehaviour
     public bool isOpen = false;
     public KeyItems validKey;
     public Light2D[] lights;
-    public PickUpObject myObject;
+    public GameObject myObject;
     public Sprite closedSprite;
     public Sprite openSprite;
     public int cannotOpenDialogueId = -1;
@@ -36,13 +36,19 @@ public class LockObject : MonoBehaviour
         DisableLights();
     }
 
-    public void Open()
+    public bool CheckKey(KeyItems id)
+    {
+        return validKey == id;
+    }
+
+    public void Open(GameObject pickUp)
     {
         isOpen = true;
 
         if (room)
             room.FixRoom(isOpen);
 
+        myObject = pickUp;
         rend.sprite = openSprite;
         myCollider.enabled = false;
         VictoryTracker.Instance.lockCount--;
@@ -68,6 +74,7 @@ public class LockObject : MonoBehaviour
         keyIdUsed = -1;
         VictoryTracker.Instance.lockCount++;
 
+        Destroy(myObject);
         myObject = null;
 
         return validKey;

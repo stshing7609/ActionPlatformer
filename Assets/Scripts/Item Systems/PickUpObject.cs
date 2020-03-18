@@ -96,9 +96,7 @@ public class PickUpObject : MonoBehaviour
             anim.enabled = true;
         }
         else
-        {
             return;
-        }
 
         isHeld = false;
         transform.SetParent(lockObject.transform);
@@ -106,18 +104,18 @@ public class PickUpObject : MonoBehaviour
         transform.localScale = new Vector2(1, 1);
         rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, .6f);
         anim.enabled = true;
-        lockObject.myObject = this;
+        lockObject.myObject = gameObject;
     }
 
-    public void Use(LockObject lockObject)
-    {
-        isHeld = false;
-        transform.SetParent(lockObject.transform);
-        transform.localPosition = Vector2.zero;
-        transform.localScale = new Vector2(1, 1);
-        rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, .6f);
-        lockObject.myObject = this;
-    }
+    //public void Use(LockObject lockObject)
+    //{
+    //    isHeld = false;
+    //    transform.SetParent(lockObject.transform);
+    //    transform.localPosition = Vector2.zero;
+    //    transform.localScale = new Vector2(1, 1);
+    //    rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, .6f);
+    //    lockObject.myObject = gameObject;
+    //}
 
     public void DestroyIt()
     {

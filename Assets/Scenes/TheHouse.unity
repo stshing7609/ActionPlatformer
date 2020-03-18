@@ -28852,6 +28852,22 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 428545907, guid: d1b56f3b6d545934185b7553f669b776, type: 3}
+      propertyPath: m_Color.r
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 428545907, guid: d1b56f3b6d545934185b7553f669b776, type: 3}
+      propertyPath: m_Color.g
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 428545907, guid: d1b56f3b6d545934185b7553f669b776, type: 3}
+      propertyPath: m_Color.b
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 428545907, guid: d1b56f3b6d545934185b7553f669b776, type: 3}
+      propertyPath: m_Color.a
+      value: 0.5019608
+      objectReference: {fileID: 0}
     - target: {fileID: 1511645285, guid: d1b56f3b6d545934185b7553f669b776, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0

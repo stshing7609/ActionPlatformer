@@ -30,6 +30,20 @@ public class PlayerPlatformerController : UnitController
     private HUDInventory inventory;
     private KeyItems selectedItem;
 
+    private BackLadder currLadder;//SideLadder currLadder;
+    private bool onLadder;
+    private bool lockLadderClimb;
+    private bool inLadderSpace;
+
+    enum LadderEnd {
+        Top,
+        Bottom,
+        None
+    }
+
+    private LadderEnd ladderEnd = LadderEnd.None;
+
+
     // Use this for initialization
     void Awake()
     {
@@ -67,8 +81,13 @@ public class PlayerPlatformerController : UnitController
 
         move.x = Input.GetAxis("Horizontal");
 
+        // if we're near a ladder and we press up, mount the ladder
+        if (inLadderSpace && Input.GetAxis("Vertical") > MIN_MOVE_DISTANCE)
+            MountLadder();
+            
+        LadderClimb(); // must be before calculate jump
         CalculateJump();
-        WallStick();
+        //WallStick();
         //Stomp();
 
         flipSprite = spriteRenderer.flipX ? move.x > MIN_MOVE_DISTANCE : move.x < -MIN_MOVE_DISTANCE;
@@ -78,7 +97,8 @@ public class PlayerPlatformerController : UnitController
         }
 
         animator.SetBool("grounded", grounded);
-        animator.SetBool("wallsticking", wallStick);
+        //animator.SetBool("wallsticking", wallStick);
+        animator.SetBool("wallsticking", onLadder);
         animator.SetBool("jumping", jumping);
         animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / maxSpeed);
         animator.SetFloat("velocityY", velocity.y);
@@ -109,7 +129,7 @@ public class PlayerPlatformerController : UnitController
             }
         }
 
-        if (!wallStick)
+        if (!onLadder)//!wallStick)
         {
             if (Input.GetButtonDown("Jump") && (grounded || (jumping && jumpCount < 2)))
             {
@@ -128,7 +148,7 @@ public class PlayerPlatformerController : UnitController
                 }
             }
         }
-        else
+        else if(onLadder)
         {
             if (Input.GetButtonDown("Jump"))
             {
@@ -136,15 +156,32 @@ public class PlayerPlatformerController : UnitController
                 jumping = true;
                 jumpCount = 1;
 
-                // if the player is holding to stick, then move the character away from the wall a little
-                if (move.x > MIN_MOVE_DISTANCE)
-                    move.x = -wallJumpImpulse;
-                else if (move.x < -MIN_MOVE_DISTANCE)
-                    move.x = wallJumpImpulse;
+                //// if the player is holding to stick, then move the character away from the wall a little
+                //if (move.x > MIN_MOVE_DISTANCE)
+                //    move.x = -wallJumpImpulse;
+                //else if (move.x < -MIN_MOVE_DISTANCE)
+                //    move.x = wallJumpImpulse;
 
-                wallStick = false;
+                ExitLadder();
             }
         }
+        //else if(wallStick)
+        //{
+        //    if (Input.GetButtonDown("Jump"))
+        //    {
+        //        velocity.y = wallJumpTakeOffSpeed;
+        //        jumping = true;
+        //        jumpCount = 1;
+
+        //        // if the player is holding to stick, then move the character away from the wall a little
+        //        if (move.x > MIN_MOVE_DISTANCE)
+        //            move.x = -wallJumpImpulse;
+        //        else if (move.x < -MIN_MOVE_DISTANCE)
+        //            move.x = wallJumpImpulse;
+
+        //        wallStick = false;
+        //    }
+        //}
 
         if (grounded && !jumping && jumpCount > 0)
             jumpCount = 0;
@@ -160,7 +197,156 @@ public class PlayerPlatformerController : UnitController
 
         gravityModifier = wallFallSpeedMultiplier;
     }
+    #region Ladders
+    public void LadderEnter(BackLadder ladder)
+    {
+        if (currLadder != null)
+            return;
+        
+        inLadderSpace = true;
+        currLadder = ladder;
+    }
+    
+    public void MountLadder()//SideLadder ladder)
+    {
+        if (onLadder)// || !CheckOnLadder(ladder.FacingRight))
+            return;
 
+        inLadderSpace = false;
+        onLadder = true;
+        move.x = 0;
+        gravityModifier = 0;
+        StartCoroutine("WaitLadderMount");
+    }
+
+    public void LadderEndCheck(bool top)
+    {
+        if (top)
+            ladderEnd = LadderEnd.Top;
+        else
+            ladderEnd = LadderEnd.Bottom;
+
+        lockLadderClimb = true;
+
+        StartCoroutine("WaitLadderEnd");
+    }
+
+    public void ExitLadder()
+    {
+        onLadder = false;
+        ladderEnd = LadderEnd.None;
+        lockLadderClimb = false;
+        gravityModifier = 1;
+        currLadder = null;
+    }
+
+    public void ExitLadderEnd()
+    {
+        if(onLadder)
+            ladderEnd = LadderEnd.None;
+    }
+
+    private void LadderClimb()
+    {
+        if (currLadder == null || !onLadder)
+            return;
+
+        gravityModifier = 0;
+
+        move.x = 0;
+        move.y = Input.GetAxis("Vertical") / 2;
+
+        // if we lock ladder climb, prevent all movement
+        if (lockLadderClimb)
+            move.y = 0;
+        // if ladder climb isn't locked, we're at the top and moving up, trigger the ledge climb animation
+        else if (ladderEnd == LadderEnd.Top && move.y > MIN_MOVE_DISTANCE)
+        {
+            // if there is an object above the ladder, prevent vertical movement
+            if (!currLadder.ObjectAbove)
+                move.y = 0;
+            // if there's emtpy space above both, we can climb up
+            else
+            {
+                // LedgeClimbAnimation();
+            }
+        }
+        // if the ladder climb isn't locked and we're at the bottom
+        else if (ladderEnd == LadderEnd.Bottom)
+        {
+            // if there is something below the climb area, allow walking
+            if(currLadder.ObjectBelow)
+                move.x = Input.GetAxis("Horizontal");
+
+            // if moving down, trigger dismount no matter if anything is below or not
+            if (move.x != 0 || move.y < -MIN_MOVE_DISTANCE)
+                ExitLadder();
+        }
+    }
+
+    IEnumerator WaitLadderEnd()
+    {
+        yield return new WaitForSeconds(.25f);
+
+        lockLadderClimb = false;
+    }
+
+    IEnumerator WaitLadderMount()
+    {
+        Vector2 target = new Vector2(currLadder.transform.position.x, transform.position.y);
+        lockLadderClimb = true;
+        float timer = 0.15f;
+
+        transform.DOMove(target, timer).SetEase(Ease.Linear);
+
+        yield return new WaitForSeconds(timer);
+
+        lockLadderClimb = false;
+    }
+
+    private void SideLadderClimb()
+    {
+        //if (currLadder == null || !onLadder)
+        //    return;
+
+        //gravityModifier = 0;
+
+        //move.x = 0;
+        //move.y = Input.GetAxis("Vertical") / 2;
+
+        //// if we lock ladder climb, prevent all movement
+        //if (lockLadderClimb)
+        //    move.y = 0;
+        //// if ladder climb isn't locked, we're at the top and moving up, trigger the ledge climb animation
+        //else if (ladderEnd == LadderEnd.Top && move.y > MIN_MOVE_DISTANCE)
+        //{
+        //    bool[] surroundings = currLadder.ObjectsAbove; // 2 items: above ladder and above climb area
+        //    // if there is either an object above the ladder of the climb area, prevent all movement
+        //    if (surroundings[0] || surroundings[1])
+        //        move.y = 0;
+        //    // if there's emtpy space above both, we can climb up
+        //    else
+        //    {
+        //        // LedgeClimbAnimation();
+        //    }
+        //}
+        //// if the ladder climb isn't locked and we're at the bottom
+        //else if (ladderEnd == LadderEnd.Bottom)
+        //{
+        //    bool[] surroundings = currLadder.ObjectsBelow; // 2 items: below ladder and below climb area
+
+        //    // if there is something below the climb area, allow walking
+        //    if (surroundings[1])
+        //        move.x = Input.GetAxis("Horizontal");
+
+        //    // if moving down, trigger dismount no matter if anything is below or not
+        //    if (move.y < -MIN_MOVE_DISTANCE)
+        //        ExitLadder();
+        //}
+    }
+    #endregion
+
+    #region Inventory
     private void PickUp()
     {
         // if our inventory is empty, set our selectedItem to what we just picked up
@@ -219,8 +405,8 @@ public class PlayerPlatformerController : UnitController
 
         selectedItem = inventory.SelectItem();
     }
-
-    //private void DropItem()
+    private void DropItem()
+    { 
     //{
     //    if (oldInventory.CheckInventoryEmpty())
     //    {
@@ -261,75 +447,65 @@ public class PlayerPlatformerController : UnitController
     //    }
 
     //    Debug.Log("Can't drop item here");
-    //}
+    }
+    #endregion
 
-    /* Wall Jump Concepting
-     * Find left and right contacts of player collider
-     * Make sure not grounded
-     * Ensure player is holding direction towards wall (negative value for wall to left and positive value for wall to right)
-     * "Platforms" collision layer can count as walls
-     * Have wallSticking parameter and reset jump count when wallSticking
-     * Decrease gravity value when holding wall (slow fall)
-     * If press Jump button while still holding towards wall, hop higher on same wall
-     * If press Jump button while holding away from wall, jump off wall and gain distance
-     * Allow jump while wall sticking
-     * If player lets go of direction towards wall, set wallSticking to false and free fall
-     * */
-
+    #region Stomp
     /* Stomp Action
      * 
      * To Stomp, the player must first be airborne
      * The stomp action has a cooldown
      * The stomp action applies force to the character downward
      * */
-    private void Stomp()
-    {      
-        if (stomping || grounded)
-        {
-            if (grounded)
-            {
-                StopCoroutine("StompLength");
-                StopCoroutine("StompCountdown");
-                gravityModifier = 1;
-                stomping = false;
-            }
-            return;
-        }
-            
-        if(Input.GetButtonDown("Vertical") && Input.GetAxis("Vertical") < -MIN_MOVE_DISTANCE)
-        {
-            velocity.y += stompImpulse;
-            gravityModifier = 0;
-            stomping = true;
-            StartCoroutine("StompLength");
-        }
-    }
+    //private void Stomp()
+    //{      
+    //    if (stomping || grounded)
+    //    {
+    //        if (grounded)
+    //        {
+    //            StopCoroutine("StompLength");
+    //            StopCoroutine("StompCountdown");
+    //            gravityModifier = 1;
+    //            stomping = false;
+    //        }
+    //        return;
+    //    }
 
-    IEnumerator StompLength()
-    {
-        float timer = 0;
-        
-        while(timer < stompDuration)
-        {
-            timer += Time.deltaTime;
-            yield return null;
-        }
+    //    if(Input.GetButtonDown("Vertical") && Input.GetAxis("Vertical") < -MIN_MOVE_DISTANCE)
+    //    {
+    //        velocity.y += stompImpulse;
+    //        gravityModifier = 0;
+    //        stomping = true;
+    //        StartCoroutine("StompLength");
+    //    }
+    //}
 
-        gravityModifier = 1;
-        velocity.y -= stompImpulse;
-        StartCoroutine("StompCountdown");
-    }
+    //IEnumerator StompLength()
+    //{
+    //    float timer = 0;
 
-    IEnumerator StompCountdown()
-    {
-        float timer = 0;
+    //    while(timer < stompDuration)
+    //    {
+    //        timer += Time.deltaTime;
+    //        yield return null;
+    //    }
 
-        while (timer < stompCooldown)
-        {
-            timer += Time.deltaTime;
-            yield return null;
-        }
+    //    gravityModifier = 1;
+    //    velocity.y -= stompImpulse;
+    //    StartCoroutine("StompCountdown");
+    //}
 
-        stomping = false;
-    }
+    //IEnumerator StompCountdown()
+    //{
+    //    float timer = 0;
+
+    //    while (timer < stompCooldown)
+    //    {
+    //        timer += Time.deltaTime;
+    //        yield return null;
+    //    }
+
+    //    stomping = false;
+    //}
+    #endregion
 }

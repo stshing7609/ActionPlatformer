@@ -6,6 +6,8 @@ TagManager:
   tags:
   - PickUpObject
   - Inventory
+  - Floor
+  - Ladder
   layers:
   - Default
   - TransparentFX
@@ -19,7 +21,7 @@ TagManager:
   - Player
   - PickUp
   - Lock
-  - 
+  - Ladder
   - 
   - 
   - 

@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 
 // base for all objects that move around
 public class PhysicsObject2D : MonoBehaviour
@@ -10,7 +9,7 @@ public class PhysicsObject2D : MonoBehaviour
     public float minGroundNormalY = 0.65f;
 
     protected const float MIN_MOVE_DISTANCE = 0.001f;                           // minimum distance necessary before we treat calculate movement
-    const float SKIN = 0.01f;
+    protected const float SKIN = 0.01f;
 
     protected bool grounded;                                                    // is this physics object ground
     protected Vector2 targetVelocity;
@@ -50,6 +49,9 @@ public class PhysicsObject2D : MonoBehaviour
     {
         velocity += gravityModifier * Physics2D.gravity * Time.deltaTime;
         velocity.x = targetVelocity.x;
+
+        if (gravityModifier == 0)
+            velocity.y = targetVelocity.y;
 
         grounded = false;
         wallStick = false;
@@ -110,12 +112,12 @@ public class PhysicsObject2D : MonoBehaviour
                     }
                 }
 
-                if (!yMovement)
-                {
+                //if (!yMovement)
+                //{
                     //Debug.Log(currentNormal);
-                    CheckWallSticking();
+                    //CheckWallSticking();
                     //Debug.Log(wallStick);
-                }
+                //}
 
                 float projection = Vector2.Dot(velocity, currentNormal);
                 if (projection < 0)
@@ -144,5 +146,22 @@ public class PhysicsObject2D : MonoBehaviour
         }
 
         wallStick = true;
+    }
+
+    protected bool CheckOnLadder(bool facingRight)
+    {
+        bool checkWrongDir;
+
+        if (facingRight)
+            checkWrongDir = targetVelocity.x >= 0;
+        else
+            checkWrongDir = targetVelocity.x <= 0;
+
+        if (checkWrongDir)
+        {
+            return false;
+        }
+
+        return true;
     }
 }

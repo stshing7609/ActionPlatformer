@@ -4822,9 +4822,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1685901115
-  m_SortingLayer: 1
-  m_SortingOrder: 2
+  m_SortingLayerID: -1383889229
+  m_SortingLayer: 3
+  m_SortingOrder: 0
   m_Sprite: {fileID: 4984878632282172922, guid: e52ad5ab6a429a84183dba60b9de0c3c,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -4845,7 +4845,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3636186888487347392}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: ddefc9b5671f8bf46afc2669bcfafc3b, type: 2}
   m_CullingMode: 0
@@ -5017,7 +5017,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_LightVolumeOpacity: 0
-  m_ApplyToSortingLayers: 00000000c530839b45e961e263800457
+  m_ApplyToSortingLayers: 00000000c530839b45e961e2b38683ad63800457
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 1
   m_LightOrder: 0

@@ -10,7 +10,8 @@ public enum KeyItems
     DoorKnob,
     Glue,
     Soap,
-    HotChocolate
+    HotChocolate,
+    Invalid
 }
 
 public class KeyObjectDictionary : MonoBehaviour

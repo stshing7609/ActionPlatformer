@@ -32,6 +32,7 @@ public class PickUpObject : MonoBehaviour
     private PlayerPlatformerController player;
     private Vector3 velocity = Vector3.zero;
     private Vector3 startScale;
+    private GameObject sensor;
 
     public bool IsHeld { get => isHeld; }
     public KeyItems Id { get => id; }
@@ -42,15 +43,15 @@ public class PickUpObject : MonoBehaviour
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         player = playerTransform.GetComponent<PlayerPlatformerController>();
         startScale = transform.localScale;
-        anim.enabled = false;
+        sensor = transform.Find("InteractionSensor").gameObject;
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (isHeld)
-            Follow();
-    }
+    //void Update()
+    //{
+    //    if (isHeld)
+    //        Follow();
+    //}
 
     void ResetValues()
     {
@@ -86,8 +87,10 @@ public class PickUpObject : MonoBehaviour
             transform.localPosition = newPos;
     }
 
-    public void Use(KeyItems id, LockObject lockObject)
+    public void Use(KeyItems newId, LockObject lockObject)
     {
+        id = newId;
+
         Sprite newSprite;
 
         if (KeyObjectDictionary.keyItems.TryGetValue(id, out newSprite))
@@ -96,7 +99,10 @@ public class PickUpObject : MonoBehaviour
             anim.enabled = true;
         }
         else
+        {
+            Debug.LogError("could not find image in dictionary");
             return;
+        }
 
         isHeld = false;
         transform.SetParent(lockObject.transform);
@@ -104,6 +110,7 @@ public class PickUpObject : MonoBehaviour
         transform.localScale = new Vector2(1, 1);
         rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, .6f);
         anim.enabled = true;
+        interactionSensor.SetActive(false);
         lockObject.myObject = gameObject;
     }
 

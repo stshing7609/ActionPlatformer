@@ -12,7 +12,7 @@ public class LockObject : MonoBehaviour
 {
     public bool isOpen = false;
     public KeyItems validKey;
-    public Light2D[] lights;
+    public List<Light2D> lights;
     public GameObject myObject;
     public Sprite closedSprite;
     public Sprite openSprite;
@@ -22,7 +22,7 @@ public class LockObject : MonoBehaviour
 
     SpriteRenderer rend;
     Collider2D myCollider;
-    int keyIdUsed = -1;
+    //int keyIdUsed = -1;
     bool firstOpen = false;
     // Enemy[] myEnemies
     
@@ -33,7 +33,7 @@ public class LockObject : MonoBehaviour
         rend = GetComponent<SpriteRenderer>();
         rend.sprite = closedSprite;
         //myCollider.enabled = true;
-        DisableLights();
+        ToggleLights(false);
     }
 
     public bool CheckKey(KeyItems id)
@@ -52,7 +52,7 @@ public class LockObject : MonoBehaviour
         rend.sprite = openSprite;
         myCollider.enabled = false;
         VictoryTracker.Instance.lockCount--;
-        EnableLights();
+        ToggleLights(true);
 
         if (!firstOpen)
         {
@@ -64,14 +64,17 @@ public class LockObject : MonoBehaviour
 
     public KeyItems Close()
     {
+        if (myObject == null)
+            return KeyItems.Invalid;
+        
         isOpen = false;
         if (room)
             room.FixRoom(isOpen);
         myCollider.enabled = true;
         rend.sprite = closedSprite;
-        DisableLights();
+        ToggleLights(false);
 
-        keyIdUsed = -1;
+        //keyIdUsed = -1;
         VictoryTracker.Instance.lockCount++;
 
         Destroy(myObject);
@@ -80,22 +83,32 @@ public class LockObject : MonoBehaviour
         return validKey;
     }
 
-    void DisableLights()
+    void ToggleLights(bool turnOn)
     {
-        if(lights.Length != 0)
+        List<int> indicesToRemove = new List<int>();
+        
+        if(lights.Count != 0)
         {
-            foreach(Light2D light in lights)
-                light.enabled = false;
-        }
-    }
-
-    void EnableLights()
-    {
-        if (lights.Length != 0)
-        {
-            foreach (Light2D light in lights)
+            for(int i = 0; i < lights.Count; i++)
             {
-                light.enabled = true;
+                if (lights[i] == null)
+                {
+                    indicesToRemove.Add(i);
+                    continue;
+                }
+                
+                if(turnOn)
+                    lights[i].enabled = true;
+                else
+                    lights[i].enabled = false;
+            }
+        }
+
+        if (indicesToRemove.Count > 0)
+        {
+            foreach (int i in indicesToRemove)
+            {
+                lights.RemoveAt(i);
             }
         }
     }

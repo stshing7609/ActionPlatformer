@@ -112,12 +112,12 @@ public class PhysicsObject2D : MonoBehaviour
                     }
                 }
 
-                //if (!yMovement)
-                //{
+                if (!yMovement)
+                {
                     //Debug.Log(currentNormal);
-                    //CheckWallSticking();
+                    CheckWallSticking();
                     //Debug.Log(wallStick);
-                //}
+                }
 
                 float projection = Vector2.Dot(velocity, currentNormal);
                 if (projection < 0)

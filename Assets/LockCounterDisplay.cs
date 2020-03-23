@@ -10,6 +10,6 @@ public class LockCounterDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        textMesh.text = "Broken Things: " + VictoryTracker.Instance.lockCount;   
+        textMesh.text = "Things to Fix: " + VictoryTracker.Instance.lockCount;   
     }
 }

@@ -1,9 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class VictoryTrigger : MonoBehaviour
 {
+    public CinemachineVirtualCamera vcam;
+    public float targetSize = 1;
+    public float zoomSpeed = 1;
+
     int lockId = 3;
     int winId = 29;
 
@@ -17,12 +22,25 @@ public class VictoryTrigger : MonoBehaviour
             {
                 show = winId;
                 win = true;
+                collision.GetComponent<PlayerPlatformerController>().DoWin();
+
+                StartCoroutine("Zoom");
             }
             else
                 show = lockId;
-
             
             DialogueCreator.Instance.InitDialogue(show, win);
         }
+    }
+
+    IEnumerator Zoom()
+    {
+        while(vcam.m_Lens.OrthographicSize > targetSize)
+        {
+            vcam.m_Lens.OrthographicSize -= Time.deltaTime * zoomSpeed;
+            yield return null;
+        }
+
+        vcam.m_Lens.OrthographicSize = 1;
     }
 }

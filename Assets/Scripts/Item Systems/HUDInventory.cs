@@ -44,7 +44,6 @@ public class HUDInventory : MonoBehaviour
         if(lockObject.CheckKey(id) && items.ContainsKey(id) && items[id] > 0)
         {
             GameObject instance = Instantiate(pickUpObjectPrefab);
-            
             instance.GetComponent<PickUpObject>().Use(id, lockObject);
             lockObject.Open(instance);
 

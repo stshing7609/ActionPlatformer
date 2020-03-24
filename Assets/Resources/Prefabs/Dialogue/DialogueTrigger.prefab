@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9041440933077609501}
   - component: {fileID: 3429222937994621210}
-  - component: {fileID: 7022903538520698070}
+  - component: {fileID: 6217464492763927134}
   m_Layer: 0
   m_Name: DialogueTrigger
   m_TagString: Untagged
@@ -45,8 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
---- !u!61 &7022903538520698070
-BoxCollider2D:
+  onlyOnce: 0
+--- !u!60 &6217464492763927134
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -58,7 +59,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.63376}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -68,6 +69,9 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 2.26752}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.5131061, y: 1.7818766}
+      - {x: -0.47783387, y: -0.49137962}
+      - {x: 0.5144845, y: -0.4913795}
+      - {x: 0.5112505, y: 1.7628188}

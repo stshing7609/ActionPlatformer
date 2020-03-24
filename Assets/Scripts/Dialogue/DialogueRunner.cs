@@ -8,6 +8,7 @@ public class DialogueRunner : MonoBehaviour
     DialogueData dialogueData;
     
     public TextMeshProUGUI textMesh;            // the text for dialogue
+    public GameObject arrow;
 
     private Queue<string> dialogueQueue;        // an array of string queues where we'll hold each speaker's dialogue sets
     private bool typing;                        // are we currently typing
@@ -79,6 +80,7 @@ public class DialogueRunner : MonoBehaviour
         StopAllCoroutines();                                        // stop all coroutines as the player force advanced past them
         typing = false;                                             // we're not typing out now
         textMesh.text = currSentence;    // reveal the entire sentence
+        arrow.SetActive(true);
 
         StartCoroutine(Wait(2f));                                 // wait for 3 seconds before starting the next sentence
     }
@@ -87,6 +89,7 @@ public class DialogueRunner : MonoBehaviour
     IEnumerator TypeText()
     {
         textMesh.text = "";              // set text of the current textArea in the pattern to empty
+        arrow.SetActive(false);
 
         // reveal each character letter by letter, one per frame
         foreach (char letter in currSentence.ToCharArray())
@@ -97,6 +100,7 @@ public class DialogueRunner : MonoBehaviour
 
         // do some things after the coroutine finishes
         typing = false;     // we are not typing anymore
+        arrow.SetActive(true);
 
         // if this is our last sentence, wait longer so the player can read
         if (IsLastSentence())

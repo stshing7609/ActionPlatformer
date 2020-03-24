@@ -43,7 +43,6 @@ public class PlayerPlatformerController : UnitController
     private LadderEnd ladderEnd = LadderEnd.None;
 
     private bool winning = false;
-    private Vector2 victoryPos = new Vector2(4.5f, -15.35f);
 
     // Use this for initialization
     void Awake()
@@ -480,13 +479,13 @@ public class PlayerPlatformerController : UnitController
     }
     #endregion
 
-    public void DoWin()
+    public void DoWin(Vector2 victoryPos)
     {
         winning = true;
-        StartCoroutine("MoveToVictoryPosition");
+        StartCoroutine(MoveToVictoryPosition(victoryPos));
     }
 
-    IEnumerator MoveToVictoryPosition()
+    IEnumerator MoveToVictoryPosition(Vector2 victoryPos)
     {
         float timer = 1;
 

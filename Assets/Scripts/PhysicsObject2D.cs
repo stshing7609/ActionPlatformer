@@ -115,7 +115,7 @@ public class PhysicsObject2D : MonoBehaviour
                 if (!yMovement)
                 {
                     //Debug.Log(currentNormal);
-                    CheckWallSticking();
+                    CheckWallSticking(hitBufferList[i].transform.gameObject.layer);
                     //Debug.Log(wallStick);
                 }
 
@@ -137,9 +137,9 @@ public class PhysicsObject2D : MonoBehaviour
         }
     }
 
-    void CheckWallSticking()
+    void CheckWallSticking(int layer)
     {
-        if (grounded || targetVelocity.x == 0)
+        if (grounded || targetVelocity.x == 0 || layer == LayerMask.NameToLayer("Platforms"))
         {
             wallStick = false;
             return;

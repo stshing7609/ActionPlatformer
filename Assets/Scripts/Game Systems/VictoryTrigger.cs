@@ -12,6 +12,8 @@ public class VictoryTrigger : MonoBehaviour
     int lockId = 3;
     int winId = 29;
 
+    private Vector2 victoryPos = new Vector2(4.5f, -15.35f);
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.transform.CompareTag("Player"))
@@ -22,7 +24,7 @@ public class VictoryTrigger : MonoBehaviour
             {
                 show = winId;
                 win = true;
-                collision.GetComponent<PlayerPlatformerController>().DoWin();
+                collision.GetComponent<PlayerPlatformerController>().DoWin(victoryPos);
 
                 StartCoroutine("Zoom");
             }
@@ -35,7 +37,11 @@ public class VictoryTrigger : MonoBehaviour
 
     IEnumerator Zoom()
     {
-        while(vcam.m_Lens.OrthographicSize > targetSize)
+        var transposer = vcam.GetCinemachineComponent<CinemachineFramingTransposer>();
+        transposer.m_DeadZoneWidth = transposer.m_DeadZoneHeight = transposer.m_LookaheadTime = 0;
+        vcam.transform.position = victoryPos;
+
+        while (vcam.m_Lens.OrthographicSize > targetSize)
         {
             vcam.m_Lens.OrthographicSize -= Time.deltaTime * zoomSpeed;
             yield return null;

@@ -90,7 +90,6 @@ public class PlayerPlatformerController : UnitController
             
             animator.SetBool("grounded", grounded);
             animator.SetBool("wallsticking", false);
-            //animator.SetBool("wallsticking", onLadder);
             animator.SetBool("jumping", jumping);
             animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / maxSpeed);
             animator.SetFloat("velocityY", velocity.y);
@@ -110,12 +109,12 @@ public class PlayerPlatformerController : UnitController
         move.x = Input.GetAxis("Horizontal");
 
         // if we're near a ladder and we press up, mount the ladder
-        //if (inLadderSpace && Input.GetAxis("Vertical") > MIN_MOVE_DISTANCE)
-        //    MountLadder();
+        if (inLadderSpace && Input.GetAxis("Vertical") > MIN_MOVE_DISTANCE)
+            MountLadder();
             
-        //LadderClimb(); // must be before calculate jump
+        LadderClimb(); // must be before calculate jump
         CalculateJump();
-        WallStick();
+        //WallStick();
         //Stomp();
 
         flipSprite = spriteRenderer.flipX ? move.x > MIN_MOVE_DISTANCE : move.x < -MIN_MOVE_DISTANCE;
@@ -125,8 +124,8 @@ public class PlayerPlatformerController : UnitController
         }
 
         animator.SetBool("grounded", grounded);
-        animator.SetBool("wallsticking", wallStick);
-        //animator.SetBool("wallsticking", onLadder);
+        //animator.SetBool("wallsticking", wallStick);
+        animator.SetBool("wallsticking", onLadder);
         animator.SetBool("jumping", jumping);
         animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / maxSpeed);
         animator.SetFloat("velocityY", velocity.y);
@@ -176,24 +175,7 @@ public class PlayerPlatformerController : UnitController
                 }
             }
         }
-        //else if(onLadder)
-        //{
-        //    if (Input.GetButtonDown("Jump"))
-        //    {
-        //        velocity.y = wallJumpTakeOffSpeed;
-        //        jumping = true;
-        //        jumpCount = 1;
-
-        //        //// if the player is holding to stick, then move the character away from the wall a little
-        //        //if (move.x > MIN_MOVE_DISTANCE)
-        //        //    move.x = -wallJumpImpulse;
-        //        //else if (move.x < -MIN_MOVE_DISTANCE)
-        //        //    move.x = wallJumpImpulse;
-
-        //        ExitLadder();
-        //    }
-        //}
-        else if (wallStick)
+        else if (onLadder)
         {
             if (Input.GetButtonDown("Jump"))
             {
@@ -201,15 +183,32 @@ public class PlayerPlatformerController : UnitController
                 jumping = true;
                 jumpCount = 1;
 
-                // if the player is holding to stick, then move the character away from the wall a little
-                if (move.x > MIN_MOVE_DISTANCE)
-                    move.x = -wallJumpImpulse;
-                else if (move.x < -MIN_MOVE_DISTANCE)
-                    move.x = wallJumpImpulse;
+                //// if the player is holding to stick, then move the character away from the wall a little
+                //if (move.x > MIN_MOVE_DISTANCE)
+                //    move.x = -wallJumpImpulse;
+                //else if (move.x < -MIN_MOVE_DISTANCE)
+                //    move.x = wallJumpImpulse;
 
-                wallStick = false;
+                ExitLadder();
             }
         }
+        //else if (wallStick)
+        //{
+        //    if (Input.GetButtonDown("Jump"))
+        //    {
+        //        velocity.y = wallJumpTakeOffSpeed;
+        //        jumping = true;
+        //        jumpCount = 1;
+
+        //        // if the player is holding to stick, then move the character away from the wall a little
+        //        if (move.x > MIN_MOVE_DISTANCE)
+        //            move.x = -wallJumpImpulse;
+        //        else if (move.x < -MIN_MOVE_DISTANCE)
+        //            move.x = wallJumpImpulse;
+
+        //        wallStick = false;
+        //    }
+        //}
 
         if (grounded && !jumping && jumpCount > 0)
             jumpCount = 0;
@@ -244,7 +243,7 @@ public class PlayerPlatformerController : UnitController
         onLadder = true;
         move.x = 0;
         gravityModifier = 0;
-        StartCoroutine("WaitLadderMount");
+        StartCoroutine(WaitLadderMount());
     }
 
     public void LadderEndCheck(bool top)
@@ -256,16 +255,18 @@ public class PlayerPlatformerController : UnitController
 
         lockLadderClimb = true;
 
-        StartCoroutine("WaitLadderEnd");
+        StartCoroutine(WaitLadderEnd());
     }
 
     public void ExitLadder()
     {
+        inLadderSpace = false;
         onLadder = false;
         ladderEnd = LadderEnd.None;
         lockLadderClimb = false;
         gravityModifier = 1;
         currLadder = null;
+        move.y = 0;
     }
 
     public void ExitLadderEnd()

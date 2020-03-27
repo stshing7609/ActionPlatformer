@@ -156,7 +156,7 @@ public class PlayerPlatformerController : UnitController
             }
         }
 
-        if (!wallStick)
+        if (!onLadder)
         {
             if (Input.GetButtonDown("Jump") && (grounded || (jumping && jumpCount < 2)))
             {
@@ -297,7 +297,7 @@ public class PlayerPlatformerController : UnitController
             // if there's emtpy space above both, we can climb up
             else
             {
-                // LedgeClimbAnimation();
+                StartCoroutine(ClimbLedge());
             }
         }
         // if the ladder climb isn't locked and we're at the bottom
@@ -331,6 +331,18 @@ public class PlayerPlatformerController : UnitController
         yield return new WaitForSeconds(timer);
 
         lockLadderClimb = false;
+    }
+
+    IEnumerator ClimbLedge()
+    {
+        float timer = 0.4f;
+        onLadder = true;
+
+        transform.DOMove(currLadder.DismountTarget, timer).SetEase(Ease.Linear);
+
+        yield return new WaitForSeconds(timer);
+
+        ExitLadder();
     }
 
     private void SideLadderClimb()

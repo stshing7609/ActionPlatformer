@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BackLadder : MonoBehaviour
 {
+    const float WIGGLE_ROOM = 0.557f;
+    
     [SerializeField] BoxCollider2D myCollider;
     [SerializeField] SpriteRenderer rend;
 
@@ -11,6 +13,7 @@ public class BackLadder : MonoBehaviour
     bool objectBelow;
     BackLadderEnd topEnd;
     BackLadderEnd bottomEnd;
+    Vector2 dismountTarget;
 
     float edgeX;
     float height;
@@ -19,6 +22,7 @@ public class BackLadder : MonoBehaviour
     public float Height { get => height; }
     public bool ObjectAbove { get => objectAbove; }
     public bool ObjectBelow { get => objectBelow; }
+    public Vector2 DismountTarget { get => dismountTarget; }
 
     private void Start()
     {
@@ -26,6 +30,10 @@ public class BackLadder : MonoBehaviour
         bottomEnd = transform.Find("Bottom").GetComponent<BackLadderEnd>();
 
         height = rend.size.y;
+
+        Transform dismountTransform = transform.Find("DismountTarget");
+        dismountTransform.localPosition = new Vector2(dismountTransform.localPosition.x, height + WIGGLE_ROOM);
+        dismountTarget = dismountTransform.position;
 
         topEnd.Init(this);
         bottomEnd.Init(this);

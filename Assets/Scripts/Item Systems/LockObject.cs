@@ -19,6 +19,7 @@ public class LockObject : MonoBehaviour
     public int cannotOpenDialogueId = -1;
     public int openedDialogueId = -1;
     public RoomController room;
+    [SerializeField] GameObject[] platforms;
 
     SpriteRenderer rend;
     Collider2D myCollider;
@@ -52,7 +53,7 @@ public class LockObject : MonoBehaviour
         rend.sprite = openSprite;
         myCollider.enabled = false;
         VictoryTracker.Instance.lockCount--;
-        ToggleLights(true);
+        ToggleLights(isOpen);
 
         if (!firstOpen)
         {
@@ -60,6 +61,10 @@ public class LockObject : MonoBehaviour
             if (openedDialogueId >= 0)
                 DialogueCreator.Instance.InitDialogue(openedDialogueId);
         }
+
+        // is a staircase
+        if (validKey == KeyItems.Toolbox)
+            TogglePlatforms(isOpen);
     }
 
     public KeyItems Close()
@@ -72,13 +77,17 @@ public class LockObject : MonoBehaviour
             room.FixRoom(isOpen);
         myCollider.enabled = true;
         rend.sprite = closedSprite;
-        ToggleLights(false);
+        ToggleLights(isOpen);
 
         //keyIdUsed = -1;
         VictoryTracker.Instance.lockCount++;
 
         Destroy(myObject);
         myObject = null;
+
+        // is a staircase
+        if (validKey == KeyItems.Toolbox)
+            TogglePlatforms(isOpen);
 
         return validKey;
     }
@@ -110,6 +119,18 @@ public class LockObject : MonoBehaviour
             {
                 lights.RemoveAt(i);
             }
+        }
+    }
+
+    void TogglePlatforms(bool turnOn)
+    {
+        // avoid errors in case there's no platform
+        if (platforms.Length < 1)
+            return;
+        
+        foreach(GameObject go in platforms)
+        {
+            go.SetActive(turnOn);
         }
     }
 }

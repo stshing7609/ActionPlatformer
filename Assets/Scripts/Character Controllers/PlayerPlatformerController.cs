@@ -337,8 +337,9 @@ public class PlayerPlatformerController : UnitController
     {
         float timer = 0.4f;
         onLadder = true;
+        Vector2 target = new Vector2(currLadder.DismountTarget.x, currLadder.DismountTarget.y + myCollider.bounds.extents.y);
 
-        transform.DOMove(currLadder.DismountTarget, timer).SetEase(Ease.Linear);
+        transform.DOMove(target, timer).SetEase(Ease.Linear);
 
         yield return new WaitForSeconds(timer);
 

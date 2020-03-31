@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BackLadder : MonoBehaviour
 {
-    const float WIGGLE_ROOM = 0.557f;
+    const float WIGGLE_ROOM = 0.195f;
     
     [SerializeField] BoxCollider2D myCollider;
     [SerializeField] SpriteRenderer rend;

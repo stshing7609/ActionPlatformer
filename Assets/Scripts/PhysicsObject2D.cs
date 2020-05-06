@@ -88,7 +88,12 @@ public class PhysicsObject2D : MonoBehaviour
             // populate our hit buffer list
             for (int i = 0; i < count; i++)
             {
+                // check if one way platform from below
+                //PlatformEffector2D platform = hitBuffer[i].collider.GetComponent<PlatformEffector2D>();
+                //if (!platform || (hitBuffer[i].normal == Vector2.up && velocity.y < 0 && yMovement))
+                //{
                 hitBufferList.Add(hitBuffer[i]);
+                //}
             }
 
             for (int i = 0; i < hitBufferList.Count; i++)
@@ -126,11 +131,12 @@ public class PhysicsObject2D : MonoBehaviour
                 }
 
                 // check the distance before any of our hits and if that distance is shorter than our movement distance, change distance to the distance before the hit
-                // Require the distance to be greater than that of our minimum move distance (to account for crates fitting snuggly by other objects)
+                // Require the distance to be greater than that of our minimum move distance
                 // Always check the distance if we're grounded to avoid clipping through walls
                 float modifiedDistance = hitBufferList[i].distance > MIN_MOVE_DISTANCE ? hitBufferList[i].distance - SKIN : distance;
 
                 distance = modifiedDistance < distance ? modifiedDistance : distance;
+
             }
 
             rb2d.position = rb2d.position + move.normalized * distance;

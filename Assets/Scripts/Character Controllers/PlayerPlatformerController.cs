@@ -6,6 +6,7 @@ using DG.Tweening;
 public class PlayerPlatformerController : UnitController
 {
     public float maxSpeed = 3;
+    public float slowMoveSpeed = 1;
     public float[] jumpTakeOffSpeeds = new float[] { 4.7f, 4 };
     public float wallJumpTakeOffSpeed = 4;
     public float wallJumpImpulse = 2;
@@ -18,8 +19,10 @@ public class PlayerPlatformerController : UnitController
     Vector2 move;
     float jumpForgivenessTime;
     int jumpCount = 0;
+    float currSpeed;
 
     bool interacting = false;
+    bool slowMoving = false;
 
     bool stomping;
     float stompDuration = .25f;
@@ -44,6 +47,8 @@ public class PlayerPlatformerController : UnitController
 
     private bool winning = false;
 
+    public bool SlowMoving { get => slowMoving; }
+
     // Use this for initialization
     void Awake()
     {
@@ -58,11 +63,11 @@ public class PlayerPlatformerController : UnitController
     {
         if (winning)
             return;
-        
+
         base.Update();
         if (Input.GetKeyDown(KeyCode.E))
         {
-           if(pickUpObject != null)
+            if (pickUpObject != null)
                 PickUp();
 
             if (lockInRange != null)
@@ -74,7 +79,7 @@ public class PlayerPlatformerController : UnitController
         //    DropItem();
         //}
 
-        if(Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q))
             SelectItem();
     }
 
@@ -82,16 +87,16 @@ public class PlayerPlatformerController : UnitController
     {
         if (winning)
         {
-            if(jumping)
+            if (jumping)
             {
                 jumping = false;
                 velocity.y = -MIN_MOVE_DISTANCE;
             }
-            
+
             animator.SetBool("grounded", grounded);
             animator.SetBool("wallsticking", false);
             animator.SetBool("jumping", jumping);
-            animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / maxSpeed);
+            animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / currSpeed);
             animator.SetFloat("velocityY", velocity.y);
 
             return;
@@ -101,9 +106,12 @@ public class PlayerPlatformerController : UnitController
 
     protected override void ComputeVelocity()
     {
-        if(winning)
+        if (winning)
             return;
-        
+
+        // check for slow move
+        CheckForSlowMove();
+
         move = Vector2.zero;
 
         move.x = Input.GetAxis("Horizontal");
@@ -127,7 +135,7 @@ public class PlayerPlatformerController : UnitController
         //animator.SetBool("wallsticking", wallStick);
         animator.SetBool("wallsticking", onLadder);
         animator.SetBool("jumping", jumping);
-        animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / maxSpeed);
+        animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / currSpeed);
         animator.SetFloat("velocityY", velocity.y);
 
         if (interacting)
@@ -135,7 +143,7 @@ public class PlayerPlatformerController : UnitController
 
         interacting = false;
 
-        targetVelocity = move * maxSpeed;
+        targetVelocity = move * currSpeed;
     }
 
     private void CalculateJump()
@@ -212,6 +220,36 @@ public class PlayerPlatformerController : UnitController
 
         if (grounded && !jumping && jumpCount > 0)
             jumpCount = 0;
+    }
+
+    private void CheckForSlowMove()
+    {
+        if ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && grounded)
+        {
+            if (currSpeed > slowMoveSpeed)
+                ChangeSpeed(slowMoveSpeed);
+            else
+                currSpeed = slowMoveSpeed;
+
+            slowMoving = true;
+        }
+        else
+        {
+            if (currSpeed < maxSpeed)
+                ChangeSpeed(maxSpeed);
+            else
+                currSpeed = maxSpeed;
+
+            slowMoving = false;
+        }
+    }
+
+    private void ChangeSpeed(float targetSpeed)
+    {
+        float timeSpeed = 4;
+        float startSpeed = currSpeed;
+
+        currSpeed = Mathf.Lerp(startSpeed, targetSpeed, timeSpeed * Time.deltaTime);
     }
 
     private void WallStick()

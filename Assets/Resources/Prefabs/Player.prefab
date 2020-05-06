@@ -487,6 +487,7 @@ MonoBehaviour:
     m_Bits: 256
   spriteRenderer: {fileID: 0}
   maxSpeed: 3
+  slowMoveSpeed: 1
   jumpTakeOffSpeeds:
   - 4.7
   - 4

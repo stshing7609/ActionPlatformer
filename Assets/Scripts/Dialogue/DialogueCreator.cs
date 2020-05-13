@@ -9,7 +9,6 @@ public class DialogueCreator : MonoBehaviour
     public static DialogueCreator Instance { get => instance; }
 
     private const string dialogueDataFileName = "data_dialogues.json";
-
     DialogueData[] allDialogueData;
 
     public GameObject dialogueBox;              // dialogue box prefab
@@ -28,7 +27,12 @@ public class DialogueCreator : MonoBehaviour
             return;
         }
 
-        LoadDataFromJSON(dialogueDataFileName);
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
+        {
+            StartCoroutine(LoadDataFromJSONWeb(dialogueDataFileName));
+        }
+        else
+            LoadDataFromJSON(dialogueDataFileName);
     }
 
     public void InitDialogue(int id, bool win)
@@ -55,7 +59,46 @@ public class DialogueCreator : MonoBehaviour
         // Path.Combine combines strings into a file path
         // Application.StreamingAssets points to Assets/StreamingAssets in the Editor, and the StreamingAssets folder in a build
         string filePath = Path.Combine(Application.streamingAssetsPath, fileName);
-        string dataAsJson = File.ReadAllText(filePath);
+        string dataAsJson;
+
+        if (File.Exists(filePath))
+        {
+            dataAsJson = File.ReadAllText(filePath);
+
+            // Pass the json to JsonUtility, and tell it to create a GameData object from it
+            AllDialogueData loadedData = JsonUtility.FromJson<AllDialogueData>(dataAsJson);
+
+            // Retrieve the allChapterData property of loadedData
+            allDialogueData = loadedData.allDialogueData;
+        }
+        else
+            Debug.Log("Cannot find file called " + filePath);
+    }
+
+    //private void LoadDataFromJSON(string fileName)
+    //{
+    //    TextAsset file = Resources.Load<TextAsset>(fileName);
+    //    string dataAsJson = file.text;
+
+    //    AllDialogueData loadedData = JsonUtility.FromJson<AllDialogueData>(dataAsJson);
+
+    //    // Retrieve the allChapterData property of loadedData
+    //    allDialogueData = loadedData.allDialogueData;
+    //}
+
+    IEnumerator LoadDataFromJSONWeb(string fileName)
+    {
+        string filePath = Path.Combine(Application.streamingAssetsPath, fileName);
+        string dataAsJson;
+
+        if (filePath.Contains("://") || filePath.Contains(":///"))
+        {
+            UnityEngine.Networking.UnityWebRequest www = UnityEngine.Networking.UnityWebRequest.Get(filePath);
+            yield return www.SendWebRequest();
+            dataAsJson = www.downloadHandler.text;
+        }
+        else
+            dataAsJson = File.ReadAllText(filePath);
 
         // Pass the json to JsonUtility, and tell it to create a GameData object from it
         AllDialogueData loadedData = JsonUtility.FromJson<AllDialogueData>(dataAsJson);

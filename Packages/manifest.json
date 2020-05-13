@@ -4,7 +4,6 @@
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.2d.tilemap": "1.0.0",
     "com.unity.barracuda": "0.5.0-preview",
-    "com.unity.ml-agents": "file:../UnityML/com.unity.ml-agents",
     "com.unity.cinemachine": "2.5.0",
     "com.unity.collab-proxy": "1.2.16",
     "com.unity.ide.rider": "1.1.4",

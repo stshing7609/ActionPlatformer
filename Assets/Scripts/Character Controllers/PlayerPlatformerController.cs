@@ -61,7 +61,7 @@ public class PlayerPlatformerController : UnitController
 
     protected override void Update()
     {
-        if (winning)
+        if (DataController.Instance.disableControls || winning)
             return;
 
         base.Update();
@@ -85,6 +85,12 @@ public class PlayerPlatformerController : UnitController
 
     protected override void FixedUpdate()
     {
+        if (DataController.Instance.disableControls)
+        {
+            animator.SetBool("grounded", true);
+            return;
+        }
+        
         if (winning)
         {
             if (jumping)

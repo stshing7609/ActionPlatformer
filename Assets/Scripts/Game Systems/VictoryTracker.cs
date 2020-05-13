@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class VictoryTracker : MonoBehaviour
 {
@@ -29,11 +28,5 @@ public class VictoryTracker : MonoBehaviour
     public void TriggerWin()
     {
         winPanel.SetActive(true);
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyUp(KeyCode.Return))
-            SceneManager.LoadScene(0);
     }
 }
